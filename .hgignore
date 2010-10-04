@@ -1,0 +1,7 @@
+syntax: glob
+
+386/*
+sys/files/src/9/*/*.8
+sys/files/src/cmd/*/*.8
+sys/files/src/cmd/*/8.out
+sys/files/src/libc/*/*.8
