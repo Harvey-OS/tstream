@@ -1,0 +1,3 @@
+These files are meant to be used with the divergefs program, so you don't go stomping
+all over the root. It's also to have a 386 directory so your experimental programs
+go somewhere harmless when you mk install.
