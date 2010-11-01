@@ -228,6 +228,18 @@ convM2S(uchar *ap, uint nap, Fcall *f)
 
 /*
  */
+
+	case Rstream:
+		if(p+BIT32SZ > ep)
+			return 0;
+		f->count = GBIT32(p);
+		p += BIT32SZ;
+		if(p+f->count > ep)
+			return 0;
+		f->data = (char*)p;
+		p += f->count;
+		break;
+
 	case Rversion:
 		if(p+BIT32SZ > ep)
 			return 0;

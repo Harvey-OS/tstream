@@ -8,8 +8,15 @@
 /*
  * Stream routines, here for now
  */
-extern	int		stream(int, int);	/* sfd = stream(fd, offset) */
-extern	long	sread(int, void*, long);	/* sread(sfd, buf, len) */
+typedef struct Stream {
+	int conn;	// this points to a TCP connection
+	char *addr;	// the address we're connecting to
+	vlong offset; // set by stream and updated by sread
+} Stream;
+
+extern	Stream*		stream(int, vlong);	/* s = stream(fd, offset) */
+extern	long	sread(Stream*, void*, long);	/* sread(sfd, buf, len) */
+extern	long		pstream(int, void*, vlong); /* system call */
 
 /*
  * mem routines

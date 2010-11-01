@@ -84,12 +84,6 @@ sysrfork(ulong *arg)
 
 	p = newproc();
 
-	/* Streaming stuff oh boy */
-	p->sgrp = smalloc(sizeof(Sgrp));
-	p->sgrp->s = smalloc(DELTAFD*sizeof(Stream*));
-	p->sgrp->ns = DELTAFD;
-	p->sgrp->ref = 1;
-
 	p->fpsave = up->fpsave;
 	p->scallnr = up->scallnr;
 	p->s = up->s;

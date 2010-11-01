@@ -2,6 +2,7 @@
 #include <libc.h>
 #include <auth.h>
 #include <fcall.h>
+#include <ip.h>
 #define Extern	extern
 #include "exportfs.h"
 
@@ -671,9 +672,12 @@ void
 slavestream(Fsrpc *p)
 {
 	Fid *f;
-	int n, r, offset;
+	int n, r, offset, afd, lcfd, dfd;
+	NetConnInfo *nci;
 	Fcall *work, rhdr;
 	char *data, err[ERRMAX];
+	char adir[40], ldir[40];
+	uchar	ipaddr[IPaddrlen];
 
 	work = &p->work;
 
@@ -685,14 +689,33 @@ slavestream(Fsrpc *p)
 
 	p->canint = 1;
 
-	n = 128; // For now, read 128 bytes at a time
+	n = 16*1024;
 	offset = work->offset;
 
 	data = malloc(n);
 	if (data == nil)
 		fatal(Enomem);
 
+	afd = announce("tcp!*!0", adir);
+	nci = getnetconninfo(adir, -1);
+	parseip(ipaddr, nci->lsys);
+	if(ipcmp(ipaddr, v4prefix) == 0 || ipcmp(ipaddr, IPnoaddr) == 0)
+		parseip(ipaddr, nci->lsys);
+	
+	rhdr.data = smprint("tcp!%s!%s", local, nci->lserv);
+	rhdr.count = strlen(rhdr.data) + 1;
+	DEBUG(DFD, "\treplying with local address = %s\n", rhdr.data);
+	reply(work, &rhdr, 0);
+
+	lcfd = listen(adir, ldir);
+	if (lcfd < 0)
+		return;
+	dfd = accept(lcfd, ldir);
+	if (dfd < 0)
+		return;
+
 	do {
+		p->canint = 1;
 		if(patternfile != nil && (f->f->qid.type&QTDIR))
 			r = preaddir(f, (uchar*)data, n, offset);
 		else
@@ -703,17 +726,17 @@ slavestream(Fsrpc *p)
 		if (r < 0) {
 			free(data);
 			errstr(err, sizeof err);
-			reply(work, &rhdr, err);
 			return;
 		}
+
+		write(dfd, data, r);
 	
-		DEBUG(DFD, "\tstream: fd=%d %d bytes\n", f->fid, r);
-	
-		rhdr.data = data;
-		rhdr.count = r;
-		reply(work, &rhdr, 0);
+		//DEBUG(DFD, "\tstream: fd=%d %d bytes\n", f->fid, r);
+
 		offset += r;	// Now read some more
 	} while (r > 0);
+	close(dfd);
+	close(lcfd);
 	free(data);
 }
 

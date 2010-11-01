@@ -716,10 +716,21 @@ mntrdwr(int type, Chan *c, void *buf, long n, vlong off)
 		if(nr > nreq)
 			nr = nreq;
 
-		if(type == Tread)
+		if(type == Tread) {
 			r->b = bl2mem((uchar*)uba, r->b, nr);
-		else if(cache)
+		} else if (type == Tstream) {
+			print("mntrdwr, tstream, about to call bl2mem\n");
+			print("r->reply.data = %s\n", r->reply.data);
+			r->b = bl2mem((uchar*)uba, r->b, r->reply.count);
+			//snprint(uba, 128, "%s", r->reply.data);
+			print("finished bl2mem\n");
+			poperror();
+			mntfree(r);
+			print("I'm outta here!\n");
+			return 0;
+		} else if(cache) {
 			cwrite(c, (uchar*)uba, nr, off);
+		}
 
 		poperror();
 		mntfree(r);
@@ -753,8 +764,6 @@ mountrpc(Mnt *m, Mntrpc *r)
 	default:
 		if(t == r->request.type+1)
 			break;
-		if (r->request.type == Tstream)
-			break;
 		sn = "?";
 		if(m->c->path != nil)
 			sn = m->c->path->s;
@@ -767,6 +776,8 @@ mountrpc(Mnt *m, Mntrpc *r)
 			r->reply.type, r->reply.tag);
 		error(Emountrpc);
 	}
+if (r->reply.type == Tstream)
+	print("returning from mountrpc\n");
 }
 
 void
@@ -810,24 +821,24 @@ mountio(Mnt *m, Mntrpc *r)
 		sleep(&r->r, rpcattn, r);
 		if(r->done){
 			poperror();
-			if (r->request.type != Tstream)
-				mntflushfree(m, r);
+			mntflushfree(m, r);
 			return;
 		}
 	}
 	m->rip = up;
 	unlock(m);
-	if (r->request.type != Tstream) {
-		while(r->done == 0) {
-			if(mntrpcread(m, r) < 0)
-				error(Emountrpc);
-			mountmux(m, r);
-		}
+	while(r->done == 0) {
+		if(mntrpcread(m, r) < 0)
+			error(Emountrpc);
+		mountmux(m, r);
 	}
 	mntgate(m);
 	poperror();
-	if (r->request.type != Tstream)
-		mntflushfree(m, r);
+
+	mntflushfree(m, r);
+
+if (r->reply.type == Tstream)
+	print("returning from mountio\n");
 }
 
 static int
@@ -862,8 +873,6 @@ mntrpcread(Mnt *m, Mntrpc *r)
 
 	/* read at least length, type, and tag and pullup to a single block */
 	if(doread(m, BIT32SZ+BIT8SZ+BIT16SZ) < 0) {
-		if (r->request.type == Tstream)
-			print("fffuuuu doread got errorz");
 		return -1;
 	}
 
@@ -893,18 +902,30 @@ mntrpcread(Mnt *m, Mntrpc *r)
 	case Rread:
 		hlen = BIT32SZ+BIT8SZ+BIT16SZ+BIT32SZ;
 		break;
+	case Rstream:
+		hlen = BIT32SZ+BIT8SZ+BIT16SZ+BIT32SZ;
+		break;
 	default:
 		hlen = len;
 		break;
 	}
+if (r->request.type == Tstream)
+	print("mntrpcread found hlen = %d, len = %d\n", hlen, len);
+
 	nb = pullupqueue(m->q, hlen);
 
+if (r->request.type == Tstream)
+	print("completed pullupqueue(m->q, hlen)\n");
+	
 	if(convM2S(nb->rp, len, &r->reply) <= 0){
 		/* bad message, dump it */
 		print("mntrpcread: convM2S failed\n");
 		qdiscard(m->q, len);
 		return -1;
 	}
+
+if (r->request.type == Tstream)
+	print("converted M2S, ready to hang data off struct\n");
 
 	/* hang the data off of the fcall struct */
 	l = &r->b;
@@ -917,6 +938,9 @@ mntrpcread(Mnt *m, Mntrpc *r)
 			hlen = 0;
 		}
 		i = BLEN(b);
+if (r->request.type == Tstream)
+	print("BLEN(b) == i == %d, len == %d\n", i, len);
+
 		if(i <= len){
 			len -= i;
 			*l = b;
@@ -929,10 +953,13 @@ mntrpcread(Mnt *m, Mntrpc *r)
 			nb->wp += i-len;
 			qputback(m->q, nb);
 			*l = b;
+if (r->request.type == Tstream)
+	print("mntrpcread here, I think I got an address r->reply.data = %s\n", r->reply.data);
 			return 0;
 		}
 	}while(len > 0);
-
+if (r->request.type == Tstream)
+	print("mntrpcread here, I think I got an address r->reply.data = %s\n", r->reply.data);
 	return 0;
 }
 
@@ -1198,109 +1225,11 @@ rpcattn(void *v)
 }
 
 static void
-mntstream(Chan* c, int offset, Stream* s) 
+mntstream(Chan* c, vlong offset, char* addr) 
 {
-	Mnt *m;
-	Mntrpc *r;
-
-	m = mntchk(c);
-	r = mntralloc(c, m->msize);
-	if (waserror()) {
-		mntfree(r);
-		nexterror();
-	}
-
-	r->request.type = Tstream;
-	r->request.fid = c->fid;
-	r->request.offset = offset;
-print("calling mountrpc with request type = %d\n", r->request.type);
-	mountrpc(m, r);
-print("returned from mountrpc, r->request.type = %d\n", r->request.type);
-	poperror();
-	s->rpc = (void*)r;
-print("s->rpc->request.type = %d\n", ((Mntrpc*)(s->rpc))->request.type);
-//	mntfree(r);
-}
-
-static long
-mntsread(Chan* c, void *buf, long n)
-{
-	Mnt *m;
- 	Mntrpc *r;
-	char *uba;
-	int cache;
-	ulong cnt, nr, nreq;
-
-	int fd, i;
-	Fgrp *f;
-	Sgrp *s;
-
-	f = up->fgrp;
-	lock(f);
-	for (i = 0; i <= f->maxfd; i++)
-		if (f->fd[i] == c)
-			fd = i;
-	unlock(f);
-print("the fd is apparently %d\n", fd);
-
-
-	s = up->sgrp;
-	r = nil;
-	for (i = 0; i <= s->maxs; i++) {
-		print("checking stream number %d, fd = %d\n", i, (s->s[i])->fd);
-		if ((s->s[i])->fd == fd) {
-			r = (Mntrpc*) (s->s[i])->rpc;
-			print("I found some sort of stream that seems to be ok, request type = %d\n", r->request.type);
-		}
-	}
-
-	if (r == nil)
-		print("wtf couldn't find right stream?\n");
-
-
-	m = mntchk(c);
-	uba = buf;
-	cnt = 0;
-
-print("entered mntsread\n");
-
-	for(;;) {
-		r->request.data = uba;
-		nr = n;
-		if(nr > m->msize-IOHDRSZ)
-			nr = m->msize-IOHDRSZ;
-		r->request.count = nr;
-		while(r->done == 0) {
-print("calling mntrpcread\n");
-			if(mntrpcread(m, r) < 0) {
-				print("error from mntrpcread\n");
-				error(Emountrpc);
-			}
-print("done calling mntrpcread\n");
-			mountmux(m, r);
-print("called mountmux\n");
-		}
-		nreq = r->request.count;
-		nr = r->reply.count;
-print("got back %d bytes\n", nr);
-		if(nr > nreq)
-			nr = nreq;
-
-print("copying result to memory\n");
-		r->b = bl2mem((uchar*)uba, r->b, nr);
-//		r->b = bl2mem((uchar*)uba, r->b, 63);
-//print("read %s\n", uba);
-
-		poperror();
-		mntfree(r);
-		//off += nr;
-		uba += nr;
-		cnt += nr;
-		n -= nr;
-		if(nr != nreq || n == 0 || up->nnote)
-			break;
-	}
-	return cnt;
+	mntrdwr(Tstream, c, addr, 0, offset);
+	print("mntrdwr returned!\n");
+	print("call me crazy but mntrdwr returned with addr = %s\n", addr);
 
 }
 
@@ -1326,5 +1255,4 @@ Dev mntdevtab = {
 	nil,
 	nil,
 	mntstream,
-	mntsread,
 };

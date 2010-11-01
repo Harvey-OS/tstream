@@ -49,10 +49,6 @@ typedef struct Walkqid	Walkqid;
 typedef struct Watchdog	Watchdog;
 typedef int    Devgen(Chan*, char*, Dirtab*, int, int, Dir*);
 
-// Streams!
-typedef struct Sgrp	Sgrp;
-typedef struct Stream Stream;
-
 #pragma incomplete DevConf
 #pragma incomplete Edf
 #pragma incomplete Mntcache
@@ -223,8 +219,7 @@ struct Dev
 	int	(*wstat)(Chan*, uchar*, int);
 	void	(*power)(int);	/* power mgt: power(1) => on, power (0) => off */
 	int	(*config)(int, char*, DevConf*);	/* returns nil on error */
-	void	(*stream)(Chan*, int, Stream*);
-	long	(*sread)(Chan*, void*, long);
+	void	(*stream)(Chan*, vlong, char*);
 };
 
 struct Dirtab
@@ -489,21 +484,6 @@ struct Fgrp
 	int	exceed;			/* debugging */
 };
 
-/* Streams! */
-struct Stream
-{
-	int	fd;	/* The associated fd */
-	void *rpc;
-	void *data;	/* A buffer */
-};
-
-struct Sgrp
-{
-	Ref;
-	Stream	**s;
-	int ns;	/* number of streams allocated */
-	int maxs;	/* highest stream # in use */
-};
 
 enum
 {
@@ -667,8 +647,6 @@ struct Proc
 	Egrp 	*egrp;		/* Environment group */
 	Fgrp	*fgrp;		/* File descriptor group */
 	Rgrp	*rgrp;		/* Rendez group */
-
-	Sgrp	*sgrp;		/* A group for streams */
 
 	Fgrp	*closingfgrp;	/* used during teardown */
 

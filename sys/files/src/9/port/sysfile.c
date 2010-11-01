@@ -1334,141 +1334,35 @@ sys_fwstat(ulong *)
 	return -1;
 }
 
-/*
- * The streaming stuff goes at the bottom for now, to prevent things getting mixed up
- */
-
-int
-growstream(Sgrp *f, int stream)	/* stream is always >= 0 */
-{
-	Stream **newstream, **oldstream;
-
-	if(stream < f->ns)
-		return 0;
-	if(stream >= f->ns+DELTAFD)
-		return -1;	/* out of range */
-	/*
-	 * Unbounded allocation is unwise; besides, there are only 16 bits
-	 * of fid in 9P
-	 */
-	if(f->ns >= 5000){
-    Exhausted:
-		print("too many streams\n");
-		return -1;
-	}
-	newstream = malloc((f->ns+DELTAFD)*sizeof(Stream*));
-	if(newstream == 0)
-		goto Exhausted;
-	oldstream = f->s;
-	memmove(newstream, oldstream, f->ns*sizeof(Stream*));
-	f->s = newstream;
-	free(oldstream);
-	f->ns += DELTAFD;
-	if(stream > f->maxs){
-		if(stream/100 > f->maxs/100)
-			//f->exceed = (stream/100)*100;
-		f->maxs = stream;
-	}
-	return 1;
-}
-
-/*
- *  this assumes that the fgrp is locked
- */
-int
-findfreestream(Sgrp *g, int start)
-{
-	int s;
-
-	for(s=start; s<g->ns; s++)
-		if(g->s[s] == 0)	// WARNING This could cause problems!
-			break;
-	if(s >= g->ns && growstream(g, s) < 0)
-		return -1;
-	return s;
-}
-
-Stream*
-newstream(int fd)
-{
-	int i;
-	Sgrp *g;
-	Stream *s;
-
-	g = up->sgrp;
-	lock(g);
-	i = findfreestream(g, 0);
-	if(i < 0){
-		unlock(g);
-		return nil;
-	}
-	if(i > g->maxs)
-		g->maxs = i;
-	// CREATE A STREAM HERE
-	s = malloc(sizeof(Stream));
-//	s->data = malloc(1024*1024*10); // For now, 10 megs at a time
-	s->fd = fd;
-
-	g->s[i] = s;
-	unlock(g);
-	return s;
-}
 
 long
-sysstream(ulong *arg)
+syspstream(ulong *arg)
 {
-	int offset, fd;
+	int fd;
+	vlong offset;
 	Chan *c;
-	Stream *s;
+	char *addr;
+	va_list list;
 
-	// Now we have fd points to the same chan
-	// To be done:
-	//	Read in the second arg as offset
-	//	Create local data buffer
-	//	Call devtab[c->type]->stream(c, offset, buffer)
-
-	offset = arg[1];
 	fd = arg[0];
+//	offset = arg[1];
+	print("arg[0] = %d, arg[1] = %d, arg[2] = %d\n", arg[0], arg[1], arg[2]);
+	print("the address seems to be %p\n", arg[1]);
+	validaddr(arg[1], 128, 1);
+	addr = (char*)arg[1];
+
+
+	/* use varargs to guarantee alignment of vlong */
+	va_start(list, arg[1]);
+	offset = va_arg(list, vlong);
+	va_end(list);
 	
 	c = fdtochan(fd, -1, 0, 1);
 
-	// Make a new Stream struct and return a pointer
-	s = newstream(fd);
-
-print("created new stream with fd = %d, stored s->fd = %d\n", fd, s->fd);
 	// Call the current device's "stream" function
-	devtab[c->type]->stream(c, offset, s);
+	devtab[c->type]->stream(c, offset, addr);
 
 	// For now, assume success
 	return 0;
 }
 
-long
-syssread(ulong *arg)
-{
-	long n, nn, nnn;
-	uchar *p;
-	Chan *c;
-
-	n = arg[2];
-	validaddr(arg[1], n, 1);
-	p = (void*)arg[1];
-	c = fdtochan(arg[0], OREAD, 1, 1);
-
-	if(waserror()){
-		cclose(c);
-		nexterror();
-	}
-
-	nnn = devtab[c->type]->sread(c, p, n);
-
-	lock(c);
-	c->devoffset += nn;
-	c->offset += nnn;
-	unlock(c);
-
-	poperror();
-	cclose(c);
-
-	return nnn;
-}

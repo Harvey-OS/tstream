@@ -142,6 +142,11 @@ sizeS2M(Fcall *f)
 /*
  */
 
+	case Rstream:
+		n += BIT32SZ;
+		n += f->count;
+		break;
+
 	case Rversion:
 		n += BIT32SZ;
 		n += stringsz(f->version);
@@ -395,6 +400,13 @@ convS2M(Fcall *f, uchar *ap, uint nap)
 		break;
 
 	case Rwstat:
+		break;
+
+	case Rstream:
+		PBIT32(p, f->count);
+		p += BIT32SZ;
+		memmove(p, f->data, f->count);
+		p += f->count;
 		break;
 	}
 	if(size != p-ap)
