@@ -136,6 +136,7 @@ sizeS2M(Fcall *f)
 
 	case Tstream:
 		n += BIT32SZ;
+		n += BIT8SZ;
 		n += BIT64SZ;
 		break;
 
@@ -330,6 +331,8 @@ convS2M(Fcall *f, uchar *ap, uint nap)
 	case Tstream:
 		PBIT32(p, f->fid);
 		p += BIT32SZ;
+		PBIT8(p, f->isread);
+		p += BIT8SZ;
 		PBIT64(p, f->offset);
 		p += BIT64SZ;
 		break;

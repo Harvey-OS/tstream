@@ -1224,12 +1224,75 @@ rpcattn(void *v)
 	return r->done || r->m->rip == 0;
 }
 
-static void
-mntstream(Chan* c, vlong offset, char* addr) 
+static long
+mntstream(Chan* c, vlong offset, char* addr, char isread) 
 {
+/*
 	mntrdwr(Tstream, c, addr, 0, offset);
 	print("mntrdwr returned!\n");
 	print("call me crazy but mntrdwr returned with addr = %s\n", addr);
+*/
+	int type = Tstream;
+	int n = 0;
+	Mnt *m;
+ 	Mntrpc *r;
+	char *uba;
+	int cache;
+	ulong cnt, nr, nreq;
+
+	m = mntchk(c);
+	uba = addr;
+	cnt = 0;
+	cache = c->flag & CCACHE;
+	if(c->qid.type & QTDIR)
+		cache = 0;
+	for(;;) {
+		r = mntralloc(c, m->msize);
+		if(waserror()) {
+			mntfree(r);
+			nexterror();
+		}
+		r->request.type = type;
+		r->request.fid = c->fid;
+		r->request.offset = offset;
+		r->request.data = uba;
+		r->request.isread = isread;
+		nr = n;
+		if(nr > m->msize-IOHDRSZ)
+			nr = m->msize-IOHDRSZ;
+		r->request.count = nr;
+		mountrpc(m, r);
+		nreq = r->request.count;
+		nr = r->reply.count;
+		if(nr > nreq)
+			nr = nreq;
+
+		if(type == Tread) {
+			r->b = bl2mem((uchar*)uba, r->b, nr);
+		} else if (type == Tstream) {
+			print("mntrdwr, tstream, about to call bl2mem\n");
+			print("r->reply.data = %s\n", r->reply.data);
+			r->b = bl2mem((uchar*)uba, r->b, r->reply.count);
+			//snprint(uba, 128, "%s", r->reply.data);
+			print("finished bl2mem\n");
+			poperror();
+			mntfree(r);
+			print("I'm outta here!\n");
+			return 0;
+		} else if(cache) {
+			cwrite(c, (uchar*)uba, nr, offset);
+		}
+
+		poperror();
+		mntfree(r);
+		offset += nr;
+		uba += nr;
+		cnt += nr;
+		n -= nr;
+		if(nr != nreq || n == 0 || up->nnote)
+			break;
+	}
+	return cnt;
 
 }
 

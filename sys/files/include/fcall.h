@@ -51,6 +51,7 @@ struct	Fcall
 		struct {
 			vlong	offset;		/* Tread, Twrite  */
 			u32int	count;		/* Tread, Twrite, Rread */
+			uchar	isread;		/* Tstream */
 			char	*data;		/* Twrite, Rread */
 		};
 		struct {

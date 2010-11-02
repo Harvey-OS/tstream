@@ -668,6 +668,10 @@ slaveopen(Fsrpc *p)
 	reply(work, &rhdr, 0);
 }
 
+
+/*
+ * For now, this is doing double duty for reading and writing streams
+ */
 void
 slavestream(Fsrpc *p)
 {
@@ -715,25 +719,34 @@ slavestream(Fsrpc *p)
 		return;
 
 	do {
-		p->canint = 1;
-		if(patternfile != nil && (f->f->qid.type&QTDIR))
-			r = preaddir(f, (uchar*)data, n, offset);
-		else
-			r = pread(f->fid, data, n, offset);
+		if (work->isread == 1) {
+			p->canint = 1;
+			if(patternfile != nil && (f->f->qid.type&QTDIR))
+				r = preaddir(f, (uchar*)data, n, offset);
+			else
+				r = pread(f->fid, data, n, offset);
+		
+			p->canint = 0;
+		
+			if (r < 0) {
+				free(data);
+				errstr(err, sizeof err);
+				return;
+			}
 	
-		p->canint = 0;
+			write(dfd, data, r);
+		
+			//DEBUG(DFD, "\tstream: fd=%d %d bytes\n", f->fid, r);
 	
-		if (r < 0) {
-			free(data);
-			errstr(err, sizeof err);
-			return;
+			offset += r;	// Now read some more
+		} else {
+			r = read(dfd, data, n);
+
+			p->canint = 1;
+			pwrite(f->fid, data, r, offset);
+			p->canint = 1;
+			offset += r;
 		}
-
-		write(dfd, data, r);
-	
-		//DEBUG(DFD, "\tstream: fd=%d %d bytes\n", f->fid, r);
-
-		offset += r;	// Now read some more
 	} while (r > 0);
 	close(dfd);
 	close(lcfd);

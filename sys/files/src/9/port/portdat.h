@@ -219,7 +219,7 @@ struct Dev
 	int	(*wstat)(Chan*, uchar*, int);
 	void	(*power)(int);	/* power mgt: power(1) => on, power (0) => off */
 	int	(*config)(int, char*, DevConf*);	/* returns nil on error */
-	void	(*stream)(Chan*, vlong, char*);
+	long	(*stream)(Chan*, vlong, char*, char);
 };
 
 struct Dirtab

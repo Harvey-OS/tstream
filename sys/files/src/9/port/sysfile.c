@@ -1340,27 +1340,30 @@ syspstream(ulong *arg)
 {
 	int fd;
 	vlong offset;
+	char isread;
 	Chan *c;
 	char *addr;
 	va_list list;
 
 	fd = arg[0];
 //	offset = arg[1];
-	print("arg[0] = %d, arg[1] = %d, arg[2] = %d\n", arg[0], arg[1], arg[2]);
-	print("the address seems to be %p\n", arg[1]);
+//	print("arg[0] = %d, arg[1] = %d, arg[2] = %d\n", arg[0], arg[1], arg[2]);
+//	print("the address seems to be %p\n", arg[1]);
 	validaddr(arg[1], 128, 1);
 	addr = (char*)arg[1];
+
 
 
 	/* use varargs to guarantee alignment of vlong */
 	va_start(list, arg[1]);
 	offset = va_arg(list, vlong);
+	isread = va_arg(list, char);
 	va_end(list);
 	
 	c = fdtochan(fd, -1, 0, 1);
 
 	// Call the current device's "stream" function
-	devtab[c->type]->stream(c, offset, addr);
+	devtab[c->type]->stream(c, offset, addr, isread);
 
 	// For now, assume success
 	return 0;

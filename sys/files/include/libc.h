@@ -12,11 +12,13 @@ typedef struct Stream {
 	int conn;	// this points to a TCP connection
 	char *addr;	// the address we're connecting to
 	vlong offset; // set by stream and updated by sread
+	char isread; // set to 1 if this is a reading stream
 } Stream;
 
-extern	Stream*		stream(int, vlong);	/* s = stream(fd, offset) */
+extern	Stream*		stream(int, vlong, char);	/* s = stream(fd, offset, isread) */
 extern	long	sread(Stream*, void*, long);	/* sread(sfd, buf, len) */
-extern	long		pstream(int, void*, vlong); /* system call */
+extern	long		pstream(int, void*, vlong, char); /* system call */
+extern  long	swrite(Stream*, void*, long);
 
 /*
  * mem routines

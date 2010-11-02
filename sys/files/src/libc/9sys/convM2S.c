@@ -217,10 +217,12 @@ convM2S(uchar *ap, uint nap, Fcall *f)
 		break;
 
 	case Tstream:
-		if(p+BIT32SZ+BIT64SZ > ep)
+		if(p+BIT32SZ+BIT8SZ+BIT64SZ > ep)
 			return 0;
 		f->fid = GBIT32(p);
 		p += BIT32SZ;
+		f->isread = GBIT8(p);
+		p += BIT8SZ;
 		f->offset = GBIT64(p);
 		p += BIT64SZ;
 		break;
