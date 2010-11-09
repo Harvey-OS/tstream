@@ -718,16 +718,6 @@ mntrdwr(int type, Chan *c, void *buf, long n, vlong off)
 
 		if(type == Tread) {
 			r->b = bl2mem((uchar*)uba, r->b, nr);
-		} else if (type == Tstream) {
-			print("mntrdwr, tstream, about to call bl2mem\n");
-			print("r->reply.data = %s\n", r->reply.data);
-			r->b = bl2mem((uchar*)uba, r->b, r->reply.count);
-			//snprint(uba, 128, "%s", r->reply.data);
-			print("finished bl2mem\n");
-			poperror();
-			mntfree(r);
-			print("I'm outta here!\n");
-			return 0;
 		} else if(cache) {
 			cwrite(c, (uchar*)uba, nr, off);
 		}
@@ -758,6 +748,8 @@ mountrpc(Mnt *m, Mntrpc *r)
 	t = r->reply.type;
 	switch(t) {
 	case Rerror:
+		if (r->request.type == Tstream)
+			panic("Rerror for Tstream, server doesn't do streams?");
 		error(r->reply.ename);
 	case Rflush:
 		error(Eintr);
@@ -776,8 +768,6 @@ mountrpc(Mnt *m, Mntrpc *r)
 			r->reply.type, r->reply.tag);
 		error(Emountrpc);
 	}
-if (r->reply.type == Tstream)
-	print("returning from mountrpc\n");
 }
 
 void
@@ -836,9 +826,6 @@ mountio(Mnt *m, Mntrpc *r)
 	poperror();
 
 	mntflushfree(m, r);
-
-if (r->reply.type == Tstream)
-	print("returning from mountio\n");
 }
 
 static int
@@ -868,21 +855,12 @@ mntrpcread(Mnt *m, Mntrpc *r)
 	r->reply.type = 0;
 	r->reply.tag = 0;
 
-	if (r->request.type == Tstream)
-		print("mntrpcread got a tstream!\n");
-
 	/* read at least length, type, and tag and pullup to a single block */
 	if(doread(m, BIT32SZ+BIT8SZ+BIT16SZ) < 0) {
 		return -1;
 	}
 
-	if (r->request.type == Tstream)
-		print("did doread, now calling pullupqueue\n");
-
 	nb = pullupqueue(m->q, BIT32SZ+BIT8SZ+BIT16SZ);
-
-	if (r->request.type == Tstream)
-		print("pullupqueue finished\n");
 
 	/* read in the rest of the message, avoid ridiculous (for now) message sizes */
 	len = GBIT32(nb->rp);
@@ -892,9 +870,6 @@ mntrpcread(Mnt *m, Mntrpc *r)
 	}
 	if(doread(m, len) < 0)
 		return -1;
-
-	if (r->request.type == Tstream)
-		print("ready to pullup header\n");
 
 	/* pullup the header (i.e. everything except data) */
 	t = nb->rp[BIT32SZ];
@@ -909,13 +884,8 @@ mntrpcread(Mnt *m, Mntrpc *r)
 		hlen = len;
 		break;
 	}
-if (r->request.type == Tstream)
-	print("mntrpcread found hlen = %d, len = %d\n", hlen, len);
 
 	nb = pullupqueue(m->q, hlen);
-
-if (r->request.type == Tstream)
-	print("completed pullupqueue(m->q, hlen)\n");
 	
 	if(convM2S(nb->rp, len, &r->reply) <= 0){
 		/* bad message, dump it */
@@ -923,9 +893,6 @@ if (r->request.type == Tstream)
 		qdiscard(m->q, len);
 		return -1;
 	}
-
-if (r->request.type == Tstream)
-	print("converted M2S, ready to hang data off struct\n");
 
 	/* hang the data off of the fcall struct */
 	l = &r->b;
@@ -938,8 +905,6 @@ if (r->request.type == Tstream)
 			hlen = 0;
 		}
 		i = BLEN(b);
-if (r->request.type == Tstream)
-	print("BLEN(b) == i == %d, len == %d\n", i, len);
 
 		if(i <= len){
 			len -= i;
@@ -953,13 +918,9 @@ if (r->request.type == Tstream)
 			nb->wp += i-len;
 			qputback(m->q, nb);
 			*l = b;
-if (r->request.type == Tstream)
-	print("mntrpcread here, I think I got an address r->reply.data = %s\n", r->reply.data);
 			return 0;
 		}
 	}while(len > 0);
-if (r->request.type == Tstream)
-	print("mntrpcread here, I think I got an address r->reply.data = %s\n", r->reply.data);
 	return 0;
 }
 
@@ -1224,14 +1185,12 @@ rpcattn(void *v)
 	return r->done || r->m->rip == 0;
 }
 
+/*
+ * Returns 0 on success, -1 on failure (failure = need compatibility mode)
+ */
 static long
 mntstream(Chan* c, vlong offset, char* addr, char isread) 
 {
-/*
-	mntrdwr(Tstream, c, addr, 0, offset);
-	print("mntrdwr returned!\n");
-	print("call me crazy but mntrdwr returned with addr = %s\n", addr);
-*/
 	int type = Tstream;
 	int n = 0;
 	Mnt *m;
@@ -1241,6 +1200,12 @@ mntstream(Chan* c, vlong offset, char* addr, char isread)
 	ulong cnt, nr, nreq;
 
 	m = mntchk(c);
+	//print("m->version = %s\n", m->version);
+	if (strncmp(m->version, VERSION9P, strlen(VERSION9P)) != 0) {
+		//print("this server doesn't speak 9P2000.s, setting compatibility mode\n");
+		return -1;
+	}
+
 	uba = addr;
 	cnt = 0;
 	cache = c->flag & CCACHE;
@@ -1262,27 +1227,23 @@ mntstream(Chan* c, vlong offset, char* addr, char isread)
 			nr = m->msize-IOHDRSZ;
 		r->request.count = nr;
 		mountrpc(m, r);
+		//print("we came back with r->reply.type = %d\n", r->reply.type);
 		nreq = r->request.count;
 		nr = r->reply.count;
 		if(nr > nreq)
 			nr = nreq;
 
-		if(type == Tread) {
-			r->b = bl2mem((uchar*)uba, r->b, nr);
-		} else if (type == Tstream) {
-			print("mntrdwr, tstream, about to call bl2mem\n");
-			print("r->reply.data = %s\n", r->reply.data);
-			r->b = bl2mem((uchar*)uba, r->b, r->reply.count);
-			//snprint(uba, 128, "%s", r->reply.data);
-			print("finished bl2mem\n");
-			poperror();
-			mntfree(r);
-			print("I'm outta here!\n");
-			return 0;
-		} else if(cache) {
-			cwrite(c, (uchar*)uba, nr, offset);
-		}
+		//print("mntrdwr, tstream, about to call bl2mem\n");
+		//print("r->reply.data = %s\n", r->reply.data);
+		r->b = bl2mem((uchar*)uba, r->b, r->reply.count);
+		//snprint(uba, 128, "%s", r->reply.data);
+		//print("finished bl2mem\n");
+		poperror();
+		mntfree(r);
+		//print("I'm outta here!\n");
+		return 0;
 
+/*
 		poperror();
 		mntfree(r);
 		offset += nr;
@@ -1291,6 +1252,7 @@ mntstream(Chan* c, vlong offset, char* addr, char isread)
 		n -= nr;
 		if(nr != nreq || n == 0 || up->nnote)
 			break;
+*/
 	}
 	return cnt;
 

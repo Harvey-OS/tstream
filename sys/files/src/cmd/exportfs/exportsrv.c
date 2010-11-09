@@ -30,11 +30,11 @@ Xversion(Fsrpc *t)
 	if(t->work.msize > messagesize)
 		t->work.msize = messagesize;
 	messagesize = t->work.msize;
-	if(strncmp(t->work.version, "9P2000", 6) != 0){
+	if(strncmp(t->work.version, "9P2000.s", 6) != 0){
 		reply(&t->work, &rhdr, Eversion);
 		return;
 	}
-	rhdr.version = "9P2000";
+	rhdr.version = "9P2000.s";
 	rhdr.msize = t->work.msize;
 	reply(&t->work, &rhdr, 0);
 	t->busy = 0;

@@ -1,7 +1,7 @@
 #pragma	src	"/sys/src/libc/9sys"
 #pragma	lib	"libc.a"
 
-#define	VERSION9P	"9P2000"
+#define	VERSION9P	"9P2000.s"
 
 #define	MAXWELEM	16
 

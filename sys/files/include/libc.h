@@ -9,10 +9,12 @@
  * Stream routines, here for now
  */
 typedef struct Stream {
+	int ofd;	// The fd for the file being streamed to/from
 	int conn;	// this points to a TCP connection
 	char *addr;	// the address we're connecting to
 	vlong offset; // set by stream and updated by sread
 	char isread; // set to 1 if this is a reading stream
+	char compatibility; // Set to 1 for compatibility mode.
 } Stream;
 
 extern	Stream*		stream(int, vlong, char);	/* s = stream(fd, offset, isread) */
