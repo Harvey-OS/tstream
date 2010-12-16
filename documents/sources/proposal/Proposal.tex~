@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% THESIS DESCRIPTION:
+%   A concise description of the main concepts of the thesis.
+%
+% RESEARCH:
+%   A list of research activities which led to this thesis.
+%
+% EXPERIMENTS:
+%   A list of the experiments performed which supported the research.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,american]{report}
+\usepackage{rit-proposal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   The following packages are all optional and depend on the specifics of what
+% is contained in the proposal.  There is no harm in leaving them in.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfigure}
+\usepackage{babel}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{lscape}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{afterpage}
+\usepackage{longtable}
+\setlongtables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Mark the document as 'draft' with a date. Be sure to comment this out for
+% the final version.
+%\usepackage{watermark}
+%\watermark{\hspace{-0.3in} \textbf{DRAFT} \hspace{2.0in} \textbf{\today}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+% The \title{} can contain line breaks as appropriate...
+\title{Improving 9P Fileserver Speeds Under Plan 9}
+% The \titleline{} must have no line breaks in it.
+\titleline{Improving 9P Fileserver Speeds Under Plan 9}
+% There should be no reason to change the \thesistype{} or the \MSThesistrue...
+\thesistype{Thesis Proposal}
+\MSthesistrue
+% This date is really not used (unless \grantdate{}{} is blank)
+\date{January 2010}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author information page
+% The \author{} should be exactly the same as your diploma
+\author{John Floren}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following information is for the signature page.
+% Note that the definition for principal adviser uses two fields.
+% This was needed so that the adviser's name could be placed on the
+% abstract page without his/her title.
+% \foursigstrue | \fivesigstrue but don't define BOTH to be true!!
+\principaladviser{Muhammad Shaaban}{Associate Professor, RIT}
+\firstreader{Secondary Adviser One \\ Secondary Adviser Title and Department}
+\secondreader{Secondary Adviser Two \\ Secondary Adviser Title and Department}
+% Use this only if \foursigstrue
+%\thirdreader{Reader Three \\ Reader3 Title}
+%\thirdreader
+% Use this only if \fivesigstrue
+%\fourthreader{Reader Four \\ Reader4 Title}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is the expected date that the committee will sign your proposal.
+\grantdate{March}{2010}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% If you want to copyright your thesis / dissertation remove the line below.
+\copyrightfalse% True by default
+% The year of the copyright; usually same as the date the committee will
+% sign the thesis. This won't be printed if \copyrightfalse
+\copyrightyear{2010}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This causes all front matter to be set.
+\beforepreface%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set to double spaced
+\renewcommand{\baselinestretch}{1.5}
+\small\normalsize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Collection of useful abbreviations.
+\newcommand{\etc} {\emph{etc.\/}}
+\newcommand{\etal}{\emph{et~al.\/}}
+\newcommand{\eg}  {\emph{e.g.\/}}
+\newcommand{\ie}  {\emph{i.e.\/}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\begin{abstractpage}
+The Plan 9 operating system from Bell Labs has broken a great deal of new ground in the realm of operating systems, providing a lightweight, network-centric OS with private namespaces and other important concepts. In Plan 9, all file operations, whether local or over the network, take place through the 9P file protocol. Although 9P is both simple and powerful, developments in computer and network hardware have over time outstripped the performance of 9P. Today, file operations, especially copying files over a network, are much slower with 9P than with other file protocols such as NFS or FTP.
+
+The problem seems to be concentrated in two places. One, the kernel. In general, the Plan 9 kernel has valued small, simple code over highly optimized code. Although this makes the kernel easy to comprehend, it also means that there are probably inefficient areas which could be optimized--for example, reducing memory copies. Two, 9P itself. 9P operates in terms of reads and writes with no buffering or caching; by adding pre-reading, for example, improved speed may be achieved.
+
+At the conclusion of this research, there should exist a new body of code written to modify the Plan 9 kernel. This code must implement the desired changes without breaking existing functionality. To be judged a success, a significant speedup must be observed. If a speedup of at least 20\% can be achieved after applying the proposed changes, the added complexity of new code may be considered worthwhile. 
+\end{abstractpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Leave these alone for the proposal...
+% Uncomment the line below if you don't want a list of tables to be printed.
+\tablespagefalse
+
+% Uncomment the line below if you don't want a list of figures to be printed.
+\figurespagefalse
+
+% \afterpreface generates the table of contents, list of tables (optional),
+% and list of figures (optional).
+%\afterpreface%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is where the main body of the proposal starts
+\body%
+\chapter{Thesis Objectives}
+The Plan 9 operating system serves all file operations using the 9P protocol. The contents of the local disk, the contents of removable media, remote file servers, and even device drivers such as the VGA and hard drive devices. It is essentially a network-transparent set of file operations.
+
+When a user opens a file, the client program makes an {\tt open()} system call, which is translated into a 9P message, {\tt Topen}, which is sent to the file server. The file server responds with a {\tt Ropen} message when the file has been opened. The client then sends {\tt Tread} and {\tt Twrite} messages to read and write the file, with the server responding with {\tt Rread} and {\tt Rwrite}. When the transaction is completed, the client sends {\tt Tclunk} and receives {\tt Rclunk} in return, at which point the file is closed.
+
+This mode of operation is conceptually very simple. Data is sent only when requested by the client; there is no read ahead, buffering, or inherent caching. In 1995, when files were small and networks tended to be local within an organization, this was not a problem. Today, files may regularly stand in the range of gigabytes. Large files are very frequently transferred over high-latency networks, such as a trans-continental Internet link. When a 600 MB file is being transferred from a Plan 9 server in New Jersey to a client in California, the transfer proceeds extremely slowly. Anecdotal evidence indicates that downloading a file from a Plan 9 server to a Plan 9 client using 9P is several times slower than downloading the same file via HTTP.
+
+Plan 9 is now being explored in supercomputing applications; in this as much as in any other application, it is essential to be able to transfer data quickly. Supercomputing operations in particular must distribute large amounts of information to a large number of nodes as quickly as possible. To that end, there are two general areas which should be investigated for potential optimization.
+
+First, the kernel. Plan 9's kernel is quite small and simple in design. It is possible for one person to understand the entirety of the structure of the kernel at a detailed level. Unlike the Linux kernel, which experiences continual optimization and tweaking, the basic structure and organization of the Plan 9 kernel does not change frequently. Drivers are written and bugs are fixed, but the system call structure (for example) has not experienced many changes in the way of optimization. Although this tends to keep the kernel small and simple, rather than a stack of successive optimizations, it also means that problems which were not apparent in the past can become an issue as hardware becomes faster and software becomes more complex.
+
+Given that the kernel has not been the focus of much optimization, it makes sense to attempt to optimize the performance of 9P by optimizing the kernel. All 9P operations must through the kernel; by, for example, improving the speed at which a {\tt read()} system call is executed, 9P's performance would be improved. In general, the various paths through the kernel which are activated by 9P calls should be examined for cases where memory copies can be reduced and other optimizations can be implemented.
+
+Beyond the kernel, the structure of 9P itself may need to be extended. As it stands, when a client sends a read request, it must suffer the effects of latency in waiting for a response. For example, consider a 300 ms latency between client and server. The client sends a {\tt Tread}, which after 300 ms arrives at the server. The server processes the request and replies with a {\tt Rread}, which then takes 300 ms to return to the client. The client must wait at least 600 ms total between the asking for the information and receiving it; given blocking reads, this means 600 ms have been wasted. If, on the other hand, the server was to send as much data as possible to the client kernel, which cached the data, the client may find that the data it has requested is already local. If, instead of sending a {\tt Topen}, it sends a {\tt Tsopen}, a "stream open". The server then begins sending data from the beginning of the file to the client; if the client sends a {\tt Tsread}, the local kernel first checks if the requested data has already arrived. If it has, there is no need to send a message to the server; if it has not arrived, a message can be sent to the server requesting that it start sending data from the requested point.
+
+Performance of Plan 9's file server speed will be compared against the performance of FreeBSD running NFS on an identical machine. FreeBSD was chosen because its kernel is less complex than Linux but still provides high-speed network file transfers.
+
+\section{Supporting Work}
+(To be completed)
+
+\section{Project Deliverables}
+The following things will be produced by the conclusion of the thesis:
+\begin{itemize}
+\item The thesis document itself
+\item A white paper that summarizes this work, to be submitted for publication
+\item A corpus of C code to implement the improvements
+\end{itemize}
+
+\chapter{Thesis Outline}
+(To be completed)
+
+\chapter{Schedule}
+Initial tentative timeline; dates are approximate:
+\begin{itemize}
+\item Begin kernel and 9P code review: March 1
+\item Complete equipment acquisition and setup: March 15
+\item Perform initial baseline measurements: March 15
+\item Begin implementing any identified kernel optimizations: April 5
+\item Implement 9P additions: May 3
+\item Begin writing thesis: July 5
+\end{itemize}
+
+\chapter{Required Resources}
+This thesis will require several computers for testing purposes. One machine, to act as the centralized Plan 9 file server and development host, has already been obtained. In addition, two computers capable of running Plan 9 will be required. Both will dual-boot Plan 9 and FreeBSD to serve as testbeds and measurement platforms for updated code. These computers are essential to do any testing, so they should be obtained as soon as possible.
+
+% Just to get the bibliography to show up...delete it.
+\nocite{*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+% Delete this text after you have read it...
+%In this section you provide a properly formatted bibliography for all papers 
+%(and only those papers) directly cited in the proposal.  Your committee has 
+%the right to expect that you have read everything that you cite (this holds 
+%true for the thesis as well).  Under no circumstances should you include 
+%papers in your proposal/thesis which you have not read and which you do 
+%not understand.  If you have constructed your arguments properly, this 
+%should not be a problem.  The format of the bibliography should be the 
+%same used in technical paper publications and it should include all 
+%information necessary for the reader to get the source document.  Keep 
+%in mind that only in special circumstances (e.g., product specifications 
+%or data sheets) should URLs be used as references.
+% Single space the bibliography to save space.
+\begin{singlespace}
+\bibliography{Proposal}
+\end{singlespace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

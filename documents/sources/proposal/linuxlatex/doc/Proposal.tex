@@ -1,0 +1,238 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% THESIS DESCRIPTION:
+%   A concise description of the main concepts of the thesis.
+%
+% RESEARCH:
+%   A list of research activities which led to this thesis.
+%
+% EXPERIMENTS:
+%   A list of the experiments performed which supported the research.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,american]{report}
+\usepackage{rit-proposal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   The following packages are all optional and depend on the specifics of what
+% is contained in the proposal.  There is no harm in leaving them in.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfigure}
+\usepackage{babel}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{lscape}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{afterpage}
+\usepackage{longtable}
+\setlongtables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Mark the document as 'draft' with a date. Be sure to comment this out for
+% the final version.
+%\usepackage{watermark}
+%\watermark{\hspace{-0.3in} \textbf{DRAFT} \hspace{2.0in} \textbf{\today}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+% The \title{} can contain line breaks as appropriate...
+\title{The Proposed Thesis Title}
+% The \titleline{} must have no line breaks in it.
+\titleline{The Proposed Thesis Title}
+% There should be no reason to change the \thesistype{} or the \MSThesistrue...
+\thesistype{Thesis Proposal}
+\MSthesistrue
+% This date is really not used (unless \grantdate{}{} is blank)
+\date{July 2004}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author information page
+% The \author{} should be exactly the same as your diploma
+\author{Your Name (as it will appear on your diploma)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following information is for the signature page.
+% Note that the definition for principal adviser uses two fields.
+% This was needed so that the adviser's name could be placed on the
+% abstract page without his/her title.
+% \foursigstrue | \fivesigstrue but don't define BOTH to be true!!
+\principaladviser{Primary Adviser}{Primary Adviser Title}
+\firstreader{Secondary Adviser One \\ Secondary Adviser Title and Department}
+\secondreader{Secondary Adviser Two \\ Secondary Adviser Title and Department}
+% Use this only if \foursigstrue
+%\thirdreader{Reader Three \\ Reader3 Title}
+%\thirdreader
+% Use this only if \fivesigstrue
+%\fourthreader{Reader Four \\ Reader4 Title}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is the expected date that the committee will sign your proposal.
+\grantdate{July}{2004}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% If you want to copyright your thesis / dissertation remove the line below.
+\copyrightfalse% True by default
+% The year of the copyright; usually same as the date the committee will
+% sign the thesis. This won't be printed if \copyrightfalse
+\copyrightyear{2004}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This causes all front matter to be set.
+\beforepreface%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set to double spaced
+\renewcommand{\baselinestretch}{1.5}
+\small\normalsize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Collection of useful abbreviations.
+\newcommand{\etc} {\emph{etc.\/}}
+\newcommand{\etal}{\emph{et~al.\/}}
+\newcommand{\eg}  {\emph{e.g.\/}}
+\newcommand{\ie}  {\emph{i.e.\/}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\begin{abstractpage}
+The abstract should \emph{stand alone} in the sense that the reader should be 
+able to get a good idea of the proposal from reading only the abstract.  An 
+abstract never contains references (citations) to other work since the same 
+material presented in the abstract will be presented (in a more in-depth 
+manner) in the main body of the text (typically the Introduction section).
+
+Three paragraphs are generally sufficient, following the "tell the reader 
+what you will say, say it, and tell the reader what you said" format.
+
+The last paragraph generally provides a description of the expected 
+outcome and the deliverables (i.e., the intellectual and/or physical 
+product that you expect to produce).
+\end{abstractpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Leave these alone for the proposal...
+% Uncomment the line below if you don't want a list of tables to be printed.
+\tablespagefalse
+
+% Uncomment the line below if you don't want a list of figures to be printed.
+\figurespagefalse
+
+% \afterpreface generates the table of contents, list of tables (optional),
+% and list of figures (optional).
+%\afterpreface%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is where the main body of the proposal starts
+\body%
+\chapter{Thesis Objectives}
+This section essentially goes into more depth regarding the work you 
+expect to do and, more importantly, why you need to do it.  You should 
+be building a case to justify doing the proposed work as well as 
+describing it.  The idea is that not only do your committee members need 
+to understand what you are proposing but they also need to understand that 
+you have a solid understanding of where this works fits in relation to other 
+work in this area that has already been completed.  This is important for a 
+number of reasons: 1) You cannot propose as an MS thesis that you re-do the 
+work that someone else has already done (there is no intellectual merit in 
+that exercise and it is not worthy of an MS Thesis - as your primary adviser 
+should have explained to you) and 2) Failure to understand the "landscape" 
+of your thesis will likely mean that you will not take full advantage of 
+prior results, and therefore your research will not have as significant 
+an impact as it might otherwise have.
+
+\section{Supporting Work}
+In this section (a.k.a., "Literature Search") you provide proof that you 
+have thoroughly studied the problem and the proposed solution.  This is 
+accomplished by summarizing the relevant research papers in your area 
+and explaining how your work goes beyond what has been done (by anyone) 
+in some demonstrable manner.  This is not a section where you simply list 
+papers with a brief summary of the contents.  The idea is to weave a story 
+from the prior work explaining the path that research has followed.  What 
+you are trying to do in this section is lead the reader to the conclusion 
+that your proposal is a natural extension of the work that has already 
+been done.  This is probably the largest section, but keep in mind  
+everything that you write in your proposal is 100\% re-usable in your thesis.
+
+\section{Project Deliverables}
+In this section you explicitly describe the things that do not exist now 
+but which will exist when you are finished.  This often takes the form 
+of a list, for example:
+\begin{itemize}
+\item The thesis document itself
+\item A white paper that summarizes this work, to be submitted for publication
+\item ...Other things that you will "produce"...
+\end{itemize}
+
+\chapter{Thesis Outline}
+This section is simply an outline of your thesis document.  The idea is to 
+show that you have thought about the overall construction of your argument 
+and how you will present it.  It is an \emph{argument} because you have to 
+support each claim in the thesis with facts either from someone else's 
+work (in which case you provide the appropriate reference) or from your 
+experiment(s) (in which case you provide the details of the experiments 
+and the results).  The construction of the thesis is one where you 
+1) Describe the problem; 2) Provide motivation (i.e., why is this problem 
+important); 3) Provide background material (i.e., what work has come 
+before yours and how does yours fit in with all of that work); 4) Describe 
+your solution; 5) Describe your evaluation method(s); 6) Present your 
+results; 7) Summarize and opine regarding the direction of future work 
+(future work beyond the thesis that (presumably) someone else will perform).
+
+\chapter{Schedule}
+This section describes how you see the work proceeding.  This is necessarily 
+course and inherently inaccurate (everyone knows that so don't worry).  
+You can include a Gantt Chart or a simple two-column table with tasks and 
+dates.  It is probably best to stick with weeks as your time scale; at this 
+point, anything more fine-grain than that doesn't make much sense (the 
+argument can be made that for some aspects of the schedule months is a 
+more appropriate granularity -- that is something that you work out with 
+your primary adviser).
+
+\chapter{Required Resources}
+This section will vary significantly from thesis to thesis.  The section needs 
+to be here even if you do not need any resource(s).  The idea is to make it 
+clear what you will need in order to complete the schedule as you have defined 
+it.  That is, you may need a workstation in a lab, or you may need specialized 
+software, or you may need special access to a computer or piece of equipment.  
+Whatever it is, you need to provide all the information (including dates, if 
+appropriate) so that you and your primary adviser can ensure that you have 
+what you need.  In addition to providing the details of the resource(s) you 
+should provide a brief justification which directly ties into your thesis work.
+
+% Just to get the bibliography to show up...delete it.
+\nocite{*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+% Delete this text after you have read it...
+%In this section you provide a properly formatted bibliography for all papers 
+%(and only those papers) directly cited in the proposal.  Your committee has 
+%the right to expect that you have read everything that you cite (this holds 
+%true for the thesis as well).  Under no circumstances should you include 
+%papers in your proposal/thesis which you have not read and which you do 
+%not understand.  If you have constructed your arguments properly, this 
+%should not be a problem.  The format of the bibliography should be the 
+%same used in technical paper publications and it should include all 
+%information necessary for the reader to get the source document.  Keep 
+%in mind that only in special circumstances (e.g., product specifications 
+%or data sheets) should URLs be used as references.
+% Single space the bibliography to save space.
+\begin{singlespace}
+\bibliography{Proposal}
+\end{singlespace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

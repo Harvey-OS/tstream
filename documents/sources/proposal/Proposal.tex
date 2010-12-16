@@ -1,0 +1,304 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% THESIS DESCRIPTION:
+%   A concise description of the main concepts of the thesis.
+%
+% RESEARCH:
+%   A list of research activities which led to this thesis.
+%
+% EXPERIMENTS:
+%   A list of the experiments performed which supported the research.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,american]{report}
+\usepackage{rit-proposal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   The following packages are all optional and depend on the specifics of what
+% is contained in the proposal.  There is no harm in leaving them in.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfigure}
+\usepackage{babel}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{lscape}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{afterpage}
+\usepackage{longtable}
+\setlongtables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Mark the document as 'draft' with a date. Be sure to comment this out for
+% the final version.
+%\usepackage{watermark}
+%\watermark{\hspace{-0.3in} \textbf{DRAFT} \hspace{2.0in} \textbf{\today}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+% The \title{} can contain line breaks as appropriate...
+\title{FTP-like Streams for the 9P Filesystem Protocol}
+% The \titleline{} must have no line breaks in it.
+\titleline{FTP-like Streams for the 9P Filesystem Protocol}
+% There should be no reason to change the \thesistype{} or the \MSThesistrue...
+\thesistype{Thesis Proposal}
+\MSthesistrue
+% This date is really not used (unless \grantdate{}{} is blank)
+\date{January 2010}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author information page
+% The \author{} should be exactly the same as your diploma
+\author{John Floren}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following information is for the signature page.
+% Note that the definition for principal adviser uses two fields.
+% This was needed so that the adviser's name could be placed on the
+% abstract page without his/her title.
+% \foursigstrue | \fivesigstrue but don't define BOTH to be true!!
+\principaladviser{Dr. Muhammad Shaaban}{Associate Professor, RIT}
+\firstreader{Dr. Roy Melton \\ Lecturer, RIT Department of Computer Engineering}
+\secondreader{Dr. Ron Minnich \\ Distinguished Member of Technical Staff, Sandia National Laboratories}
+% Use this only if \foursigstrue
+%\thirdreader{Reader Three \\ Reader3 Title}
+%\thirdreader
+% Use this only if \fivesigstrue
+%\fourthreader{Reader Four \\ Reader4 Title}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is the expected date that the committee will sign your proposal.
+\grantdate{November}{2010}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% If you want to copyright your thesis / dissertation remove the line below.
+\copyrightfalse% True by default
+% The year of the copyright; usually same as the date the committee will
+% sign the thesis. This won't be printed if \copyrightfalse
+\copyrightyear{2010}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This causes all front matter to be set.
+\beforepreface%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set to double spaced
+\renewcommand{\baselinestretch}{1.5}
+\small\normalsize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Collection of useful abbreviations.
+\newcommand{\etc} {\emph{etc.\/}}
+\newcommand{\etal}{\emph{et~al.\/}}
+\newcommand{\eg}  {\emph{e.g.\/}}
+\newcommand{\ie}  {\emph{i.e.\/}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\begin{abstractpage}
+The Plan 9 operating system from Bell Labs has broken a great deal of new ground in the realm of operating systems, providing a lightweight, network-centric OS with private namespaces and other important concepts. In Plan 9, all file operations, whether local or over the network, take place through the 9P file protocol. Although 9P is both simple and powerful, developments in computer and network hardware have over time outstripped the performance of 9P. Today, file operations, especially copying files over a network, are much slower with 9P than with protocols such as HTTP or FTP.
+
+9P operates in terms of reads and writes with no buffering or caching; it is essentially a translation of the Unix file operations (open, read, write, close, etc) into network messages. Given that the original Unix systems only dealt with files on local disks, it seems that it may be time to extend 9P (and the file I/O programming libraries) to take into consideration the fact that many files now exist at the other end of network links. Other researchers have attempted to rectify the problem of network file performance through caching and other programmer-transparent fixes, but there is a second option. \emph{Streams} (a continuous flow of data from server to client) allow programmers to read and write data sequentially (an extremely common case) while reducing the number of protocol messages and avoiding some of the problems with round-trip latency. 
+
+By adding streaming to the 9P protocol and extending the regular POSIX I/O functions, this work will allow programmers to perform sequential file operations at speeds much closer to those of HTTP. Based on the comparative performance of 9P and HTTP, the target of this effort will be to halve the transfer time of 9P over a link with 50 ms round-trip time.
+\end{abstractpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Leave these alone for the proposal...
+% Uncomment the line below if you don't want a list of tables to be printed.
+\tablespagefalse
+
+% Uncomment the line below if you don't want a list of figures to be printed.
+\figurespagefalse
+
+% \afterpreface generates the table of contents, list of tables (optional),
+% and list of figures (optional).
+%\afterpreface%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is where the main body of the proposal starts
+\body%
+\chapter{Thesis Objectives}
+\section{Motivation}
+The Plan 9 operating system serves all file operations using the 9P protocol. The contents of the local disk, the contents of removable media, remote file servers, and even device drivers such as the VGA and hard drive devices are accessed via 9P. It is essentially a network-transparent set of file operations.
+
+In Plan 9, client programs access files using normal procedure calls, such as open, close, read, write, create, and stat. Calling these functions generate system calls; those system calls which operate on files are translated into 9P and sent over the network to the appropriate file server. Messages come in pairs: a client sends a T-message (such as {\tt Tread}) and receives an R-message (such as {\tt Rread}) in response. The only exception is {\tt Rerror}, which may be sent in response to any T-message.
+
+When a user opens a file, the client program makes an {\tt open()} system call, which is translated into a 9P message, {\tt Topen}, which is sent to the file server. The file server responds with a {\tt Ropen} message when the file has been opened. The client then sends {\tt Tread} and {\tt Twrite} messages to read and write the file, with the server responding with {\tt Rread} and {\tt Rwrite}. When the transaction is completed, the client sends {\tt Tclunk} and receives {\tt Rclunk} in return, at which point the file is closed.
+
+This mode of operation is conceptually very simple. Data is sent only when requested by the client; there is no read ahead, buffering, or inherent caching. In 1995, when files were small and networks tended to be local within an organization, this was not a problem. Today, files may regularly stand in the range of gigabytes. Large files are very frequently transferred over high-latency networks, such as a trans-continental Internet link.
+
+Anecdotal evidence indicates that downloading a file from a Plan 9 server to a Plan 9 client using 9P is several times slower than downloading the same file via HTTP. One example is the simple case of playing an MP3 file from a remote machine. If the file is accessed via 9P, playback stutters every few seconds, because the player application issues read calls for the next chunk of data and runs out of audio to play while it is still waiting for the new data to arrive. If, however, the file is fetched via HTTP and piped to the music player ({\tt "hget http://server/file.mp3 | games/mp3dec"}), playback continues smoothly.
+
+The structure of 9P itself may now be ready for extension. As it stands, when a client sends a read request, it must suffer the effects of latency in waiting for a response. For example, consider a 300 ms latency between client and server. The client sends a {\tt Tread} message asking for 2048 bytes of data, which after 300 ms arrives at the server. The server processes the request and replies with a {\tt Rread}, which then takes 300 ms to return to the client with the data. The client must wait at least 600 ms total between asking for the information and receiving it; given blocking reads, this means 600 ms have been wasted. If, on the other hand, the server was to send as much data as possible to the client kernel for buffering, the client may find that the data it has requested is already local. Instead of sending a {\tt Topen}, a client could send {\tt Tstream}, "stream open". The server would then reply with an IP and port to which the client should connect; the server would push all of the file contents to that new connection, while the client could read from that connection at its leisure.
+
+Although comparisons in this document are mostly drawn between 9P and HTTP, the proposed streaming system more clearly resembles passive FTP\cite{FTPrfc}. In both FTP and streaming 9P, the existing connection is used to negotiate a new, separate, data-only connection which is used for reading or writing only one file. Comparisons are made between HTTP and 9P simply because HTTP is now the most familiar protocol for most users.
+
+This concept of "streaming" the entire file at once differs from traditional caching in several important points. In general, caching applies to every application working in the namespace served by the cache. It "just happens", without requiring any modifications to the client programs. Streaming requires the application writer to explicitly request a stream in places where it makes sense to have a stream--such as writing out a file from a text editor or playing an MP3--while still allowing the use of traditional, non-cached, non-sequential reads and writes elsewhere.
+
+Plan 9 is now also being explored in supercomputing applications; in this as much as in any other application, it is essential to be able to transfer data quickly. Supercomputing operations in particular must distribute large amounts of information to a large number of nodes as quickly as possible. While the internal networks of supercomputers have extremely low latency, the use of {\tt Tread/Rread} pairs adds to the congestion of the network, injuring performance. Using streams to transfer data sets and executable programs between supercomputer nodes could have a huge impact on the time a computation takes, in a field where small delays add up fast.
+
+\subsection{Preliminary Measurements}
+A number of tests were performed to compare the transfer speeds of HTTP and 9P. Two Plan 9 computers, one running as a CPU/auth/file server ("gnot") and one running as a standalone terminal ("illiac") were connected via a network consisting of a 100 Mbit switch and a 10 Mbit hub, with a Linux computer acting as a gateway between the switch and the hub. The Linux computer was configured using the {\tt netem} kernel extensions to induce delay between the two halves of the network. The use of a 10 Mbit hub served to reduce the available bandwidth, which in combination with the artificially-induced latency was intended to resemble an Internet connection.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ | c || r | r | }
+			\hline
+			\bf{File Size (MB)} & \bf{9P (sec.)} & \bf{HTTP (sec.)} \\ \hline
+			10 & 10.60 & 11.91 \\ \hline
+			50 & 51.96 & 62.04 \\ \hline
+			100 & 103.64 & 124.80 \\ \hline
+			200 & 208.81 & 249.50 \\ \hline		
+		\end{tabular}
+	\end{center}
+	\caption{HTTP vs. 9P, no induced latency, average RTT 500 $\mu$s}
+	\label{table:nolatency}
+\end{table}
+
+As Table \ref{table:nolatency} shows, there is very little difference between 9P and HTTP when latency is low--in fact, 9P slightly outperforms HTTP.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ | c || r | r | }
+			\hline
+			\bf{File Size (MB)} & \bf{9P (sec.)} & \bf{HTTP (sec.)} \\ \hline
+			10 & 29.57 & 14.08 \\ \hline
+			50 & 147.44 & 70.81 \\ \hline
+			100 & 296.06 & 140.38 \\ \hline
+			200 & 590.94 & 281.63 \\ \hline		
+		\end{tabular}
+	\end{center}
+	\caption{HTTP vs. 9P, induced latency of 15 ms RTT}
+	\label{table:15mslatency}
+\end{table}
+
+However, when 7.5 ms of latency is introduced in each direction (total RTT of 15 ms), 9P falls badly behind (see Table \ref{table:15mslatency}). While HTTP takes only 1.13 times as long to copy a 200 MB file with 15 ms RTT versus 500 μs RTT, 9P takes 2.83 times as long!
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ | c || r | r | }
+			\hline
+			\bf{File Size (MB)} & \bf{9P (sec.)} & \bf{HTTP (sec.)} \\ \hline
+			10 & 76.16 & 19.43 \\ \hline
+			50 & 374.07 & 98.88 \\ \hline
+			100 & 747.13 & 197.90 \\ \hline
+			200 & 1512.31 & 400.00 \\ \hline		
+		\end{tabular}
+	\end{center}
+	\caption{HTTP vs. 9P, induced latency of 50 ms RTT}
+	\label{table:50mslatency}
+\end{table}
+
+Table \ref{table:50mslatency} shows the results of the final test, with a RTT of 50 ms. Note that it took HTTP about 250 seconds to copy a 200 MB file with no induced latency, and required less than twice that time (400 seconds) to copy the same file with 25 ms of latency in each direction. 9P, on the other hand, went from a speedy 208 seconds to about 1,512 seconds--over 25 minutes!
+
+Given that latencies on the Internet can easily reach surpass the times tested here--at the time of writing, the RTT from Rochester, NY to Livermore, CA was around 90 ms--it is clear that 9P is not suitable for transferring data across the Internet. The gap between 9P and HTTP increases with latency; since the speed of light imposes a certain latency on all operations, 9P must be modified to achieve better performance in a world where files may increasingly be stored thousands of miles away.
+
+\section{Proposed Work}
+As mentioned above, streaming will be implemented by having the client and server negotiate a separate TCP connection over which data can be sent, using the 9P protocol to share connection details.
+
+Two new messages, {\tt Tstream} and {\tt Rstream}, will be added to 9P for negotiating streams. The formats of the two messages are \emph{Tstream tag[2] fid[4] isread[1] offset[8]} and \emph{Rstream tag[2] count[4] data[count]} (numbers in brackets represent the number of bytes for that field). Clients will issue a single {\tt Tstream} message; the server will respond with a single {\tt Rstream} containing a string in the format "tcp!x.x.x.x!yyyyy", where "x.x.x.x" is the server's IP and "yyyyy" is an unused port.
+
+The server will listen on the incoming port for a connection. When the client receives the {\tt Rstream} message, it will dial the server at the specified address, thus establishing a new TCP connection between the client and the server. Then, depending on whether or not the {\tt isread} flag was set in the {\tt Tstream} message, the server will either send the contents of the selected file over the connection, or attempt to read data from the connection and write it to the selected file.
+
+The interface will be presented to the programmer as a set of three standard library functions. The first, {\tt Stream* stream(int fd, vlong offset, char isread)}, will take a file descriptor, a desired starting offset, and a flag denoting whether the stream will be for reading or writing. This function will perform a system call, stepping into the kernel in order to set up the parameters for streaming and send the 9P messages. The function returns a pointer to a {\tt Stream} structure, which among other things contains a file descriptor for the streaming TCP connection.
+
+The two remaining functions, {\tt long sread(Stream* s, void* buf, long n)} and {\tt long swrite(Stream* s, void* buf, long n)}, will behave very similarly to the existing {\tt read} and {\tt write} functions, but operating on {\tt Stream} structs rather than integer file descriptors.
+
+Because TCP is an in-order, guaranteed transmission, flow-controlled protocol, it will not be necessary to implement any flow control. Clients and servers will be able to read from and write to their streams as quickly as possible, insuring the fastest possible movement of data with minimal overhead.
+
+\section{Supporting Work}
+File system performance over low-bandwidth and high-latency links has been an area of concern for decades. Many have worked to improve performance using caching, but others have taken different approaches, looking to reduce protocol overhead or adopt new, more effective methods.
+
+In 2007, Francisco Ballesteros et. al.\cite{Op} presented their work on a high-latency system. Their ongoing project is called Octopus, a distributed system built on top of Inferno, which in turn is derived from Plan 9. A replacement for the 9P protocol was written which combines several file operations into two operations, {\tt Tput/Rput} and {\tt Tget/Rget}. Thus, a client may send a single {\tt Tget} request to open a file, get the metadata, and read some of the data.
+
+The Op system was implemented using a user-mode file server, Oxport, and a user-mode client, Ofs. Oxport presents the contents of a traditional 9p-served file tree via Op. Ofs then communicates with Oxport using Op; Ofs provides the exported file tree to clients on the local machine. When a user program, such as cat, attempts to read a file that actually resides on a remote machine, the 9P commands are sent to Ofs. Ofs then attempts to batch several 9P messages into a single Op message; a call to {\tt open()} normally sends {\tt Twalk} and {\tt Topen} messages, but Ofs will batch them both into a single {\tt Tget} message to walk to the file, open it, and fetch the first {\tt MAXDATA} bytes of data. Metadata from files and directories is also cached locally for the duration of a ``coherency window'' in the interest of reducing network read/writes while not losing coherency with the server file system.
+
+The Op protocol showed significant reductions in program run-time latency. An {\tt lc} (equivalent to {\tt ls}) that originally took 2.3 seconds to complete using original 9P took only 0.142 seconds with a coherency window of 2 seconds. The bandwidth was improved by orders of magnitude when building software using {\tt mk}.
+
+While Op gave good results, its design is not optimal. The Op protocol is only spoken by Oxport and Ofs. As user-level programs, they incur more overhead than in-kernel optimizations. Also, when the functionality is implemented as a transparent operation, it does not allow the programmer to choose between traditional 9P-style operations and Op; a separate streaming system would give that additional flexibility. Op also saw poorer performance than regular 9P on low-latency links, which are the norm in supercomputers; as Plan 9 expands into supercomputing and across the global Internet, it needs an improved 9P protocol that can work well over both high- and low-latency connections. Finally, Op was optimized for small files, having a relatively small {\tt MAXDATA} (the amount of data that can be transferred in one Rget message). Op would still need to execute many {\tt Tget} requests to transfer a large file, which is one of the cases of interest in this thesis.
+
+The NFS protocol version 4 utilizes a similar strategy with its COMPOUND RPCs, which allow clients to batch up several RPCs into one message. Thus, a client could read from a file in one RPC by sending a LOOKUP, OPEN, and READ all in a single COMPOUND RPC.\cite{NFS4}
+
+Oleg Kiselyov in 1999 presented a paper\cite{HTTPFS} describing his work on a file system based on HTTP. This file system, HTTPFS, is capable of reading, writing, creating, appending, and deleting files using only the standard {\tt GET, PUT, HEAD,} and {\tt DELETE} requests.
+
+The HTTPFS consists of two components, a client and a server. The client can in fact be any program which accesses files; such a program is converted to an HTTPFS client by linking with a library providing HTTPFS-specific replacements for the regular file system calls, such as open, read, close, etc. These replacement functions simply call the standard system calls, \emph{unless} the filename given begins with {\tt http://}. If a URI is given, the function instead creates an appropriate HTTP request and sends it to the server. For example, calling {\tt open("http://hostname/cgi-bin/admin/MCHFS-server.pl/README.html", O\_RDONLY)}\cite{HTTPFS} causes the client to send out a {\tt GET} request for that file. When the file is received, the client caches it locally; reads and writes then take place on the locally cached copy.
+
+Kiselyov wrote an example HTTPFS server, called MCHFS. MCHFS acts much like a regular web server, allowing any browser to get listings of files. However, it also allows the user to access the entire server filesystem under the path component {\tt DeepestRoot}, as in {\tt open("http://hostname/cgi-bin/admin/MCHFS-server.pl\linebreak/DeepestRoot/etc/passwd", O\_RDONLY)}\cite{HTTPFS}.
+
+An interesting factor of the HTTPFS design is its approach toward caching and concurrency. When a file is opened, the entire file is fetched via HTTP and cached locally. All reads and writes to that file then take place on the local copy. Finally, when {\tt close()} is called, the local copy is written back to the server using {\tt PUT}.
+
+In some ways, HTTPFS is quite similar to the goal of this thesis. It reads in the entire remote file at once, then redirects reads and writes to the local copy. However, as with Op, it does not give the user any choice: all HTTP-served files are read all at once and cached locally, while all other files are accessed traditionally. The goal of 9P streams is to allow the programmer a clear choice in accessing files, either by the traditional open/read/write methods, or using streams.
+
+The Low-Bandwidth File System (LBFS) adapted typical caching behavior for low-bandwidth operations. The most salient change was the use of hash-indexed data chunks. LBFS clients maintain a large local file cache; files are divided into chunks and indexed by a hash. These hashes are then used to identify which sections of a file have been changed and avoid retransmitting unchanged chunks. When reading a file, the client issues a GETHASH request to get the hashes of all chunks in the file, then issues READ RPCs for those chunks which are not already stored locally. This technique provided excellent results but the entire premise is rapidly becoming far less important; bandwidth is rarely a problem today. LBFS made no provisions to account for latency, which remains a problem over long links due to the limitations of switching technology and the speed of light.
+
+Patterson, Gibson, and Satyanarayanan in 1993 experimented with the use of Transparent Informed Prefetching (TIP) to alleviate the problems of network latency and low bandwidth. With TIP, a process informs the file system of its future file accesses. For instance, the {\tt make} program prepares a directed acyclic graph of dependencies, including files; this list of files would be sent to the filesystem for pre-fetching. In testing, separate processes were used to perform pre-fetching from local disks and Coda file servers. Results showed significant (up to 30%) reduction in execution times for programs such as {\tt make} and {\tt grep}.\cite{TIP}
+
+Other researchers have applied parallelism to the task.\cite{Lee01appliedtechniques}\cite{PVFS} Filesystems such as PVFS stripe the data across multiple storage nodes; a client computer then fetches chunks of files from several different computers simultaneously, reducing the impact of latency and the bottleneck of bandwidth to some extent. Others\cite{NFSP} spread data across the disks of the client nodes and indexed it using a metadata server. A simple parallel file transfer program already exists in Plan 9: the fcp program uses several threads, each copying their own portion of the file--but it is unreasonable to expect every program to implement multi-threaded file reading to cover the holes in 9P. Parallel file systems are frequently not an option; often, only one computer is available to serve files. The complexity of coordinating multiple servers and having the client deal with all of these servers makes a simpler solution desirable.
+
+Clearly, while caching and other file system modifications have been successful, the general theme has been one of operating in a user-transparent fashion. The results of this is that behavior can sometimes be unclear, unexpected, or inconvenient (cache coherency problems, etc.). By providing a clear choice to the programmer, such problems can be avoided, allowing the programmer to choose streams where high-speed sequential reads are necessary and traditional I/O elsewhere.
+
+\section{Project Direction and Deliverables}
+The primary intention of this work is to design and implement streams in the Plan 9 operating system. It will be necessary to define an exact set of 9P messages, library functions, system calls, and kernel data structures to implement the streams. Having implemented streams in the kernel, some programs will be modified to take advantage of the new design and test the system.
+
+
+The following things will be produced by the conclusion of the thesis:
+\begin{itemize}
+\item The thesis document itself.
+\item A white paper that summarizes this work, to be submitted for publication.
+\item A corpus of C code to implement the improvements.
+\item A small selection of Plan 9 programs to take advantage of streams.
+\end{itemize}
+
+%\chapter{Schedule}
+%Tentative timeline; dates are approximate:
+%\begin{itemize}
+%\item TODO
+%\end{itemize}
+
+\chapter{Required Resources}
+To properly develop and test this work, four computers are required:
+\begin{itemize}
+\item A server running Plan 9 to provide file and authorization services.
+\item A computer running Plan 9 to act as a workstation and test server.
+\item A computer running Plan 9 to act as a test client.
+\item A computer running Linux, to do network bridging and induce latency between the test server and client.
+\end{itemize}
+As of July, all four computers have been acquired and configured.
+
+% Just to get the bibliography to show up...delete it.
+\nocite{*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+% Delete this text after you have read it...
+%In this section you provide a properly formatted bibliography for all papers 
+%(and only those papers) directly cited in the proposal.  Your committee has 
+%the right to expect that you have read everything that you cite (this holds 
+%true for the thesis as well).  Under no circumstances should you include 
+%papers in your proposal/thesis which you have not read and which you do 
+%not understand.  If you have constructed your arguments properly, this 
+%should not be a problem.  The format of the bibliography should be the 
+%same used in technical paper publications and it should include all 
+%information necessary for the reader to get the source document.  Keep 
+%in mind that only in special circumstances (e.g., product specifications 
+%or data sheets) should URLs be used as references.
+% Single space the bibliography to save space.
+\begin{singlespace}
+\bibliography{Proposal}
+\end{singlespace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

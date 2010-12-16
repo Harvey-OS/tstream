@@ -1,0 +1,57 @@
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2009.10.8)  4 FEB 2010 22:15
+entering extended mode
+ %&-line parsing enabled.
+**&latex prv_Proposal.ini \nonstopmode\nofiles\PassOptionsToPackage{active,tigh
+tpage,auctex}{preview}\AtBeginDocument{\ifx\ifPreview\undefined\RequirePackage[
+displaymath,floats,graphics,textmath,sections,footnotes]{preview}[2004/11/05]\f
+i} \input Proposal.tex
+(./prv_Proposal.ini
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf-texlive/tex/latex/carlisle/mylatex.ltx)
+(/usr/share/texmf-texlive/tex/latex/tools/.tex File ignored))
+No auxiliary output files.
+
+(./Proposal.tex (/usr/share/texmf-texlive/tex/latex/base/report.cls
+Document Class: report 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size12.clo
+File: size12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+
+! LaTeX Error: File `rit-proposal.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.19 \usepackage
+                {subfigure}^^M
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 243 strings out of 95087
+ 2856 string characters out of 1183278
+ 46881 words of memory out of 1500000
+ 3494 multiletter control sequences out of 10000+50000
+ 3938 words of font info for 15 fonts, out of 1200000 for 2000
+ 28 hyphenation exceptions out of 8191
+ 22i,0n,19p,497b,36s stack positions out of 5000i,500n,6000p,200000b,5000s
+No pages of output.

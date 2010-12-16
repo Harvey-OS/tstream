@@ -1,0 +1,33 @@
+@article{CrammingMoreComponentsOntoIntegratedCircuits,
+   title        = {{Cramming More Components onto Integrated Circuits}},
+   author       = "Gordon E. Moore",
+   journal      = "Electronics",
+   month        = apr,
+   year         = 1965,
+   pages        = "114--117"
+}
+
+@Misc{OnTheGlitchPhenomenon,
+   title        = {{On The Glitch Phenomenon}},
+   author       = "Leslie Lamport and Richard Palais",
+   howpublished = "Personal publication (Available at http://www.\-research.\-compaq.\-com/\-SRC/\-personal/\-lamport/\-pubs/\-glitch.ps)",
+   month        = nov,
+   year         = 1976
+}
+
+@Misc{Spec2000,
+   title        = {{SPEC CPU2000 Benchmark Suite, v1.2}},
+   author       = "Standard Performance Evaluation Corporation",
+   howpublished = "Available at http://www.\-spec.\-org/\-cpu2000",
+   month        = nov,
+   year         = 2001
+}
+
+@InProceedings{ValidityOfTheSingleProcessorApproachToAchievingLargeScaleComputingCapabilities,
+   title        = {{Validity of the single processor approach to achieving large scale computing capabilities}},
+   author       = "Dr. Gene M. Amhahl",
+   booktitle    = "AFIPS Conference Proceedings",
+   month        = apr,
+   year         = 1967,
+   pages        = "483--485"
+}

@@ -1,0 +1,2 @@
+Hickey, Jason: "Providing Asynchronous File I/O For the Plan 9 Operating System"
+Problem: When using user-mode threads on top of a single kernel process, if one thread performs blocking IO, the entire process must wait.

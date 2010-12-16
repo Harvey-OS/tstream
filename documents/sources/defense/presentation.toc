@@ -1,0 +1,16 @@
+\beamer@endinputifotherversion {3.07pt}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{What is Haptics?}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Haptic Systems}{4}{0}{1}
+\beamer@sectionintoc {2}{Motivation}{9}{0}{2}
+\beamer@subsectionintoc {2}{1}{Haptic Systems}{9}{0}{2}
+\beamer@subsectionintoc {2}{2}{Haptic System Limitations}{12}{0}{2}
+\beamer@subsectionintoc {2}{3}{Problem Statement}{13}{0}{2}
+\beamer@sectionintoc {3}{Related Work}{14}{0}{3}
+\beamer@subsectionintoc {3}{1}{Physiological Data}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{Phenomenological Models}{15}{0}{3}
+\beamer@subsectionintoc {3}{3}{Biophysical Model}{16}{0}{3}
+\beamer@sectionintoc {4}{Methodology}{20}{0}{4}
+\beamer@subsectionintoc {4}{1}{Simulation Enviornment}{20}{0}{4}
+\beamer@subsectionintoc {4}{2}{New Parameters}{21}{0}{4}
+\beamer@subsectionintoc {4}{3}{More Theory/Implementation}{25}{0}{4}

@@ -1,0 +1,47 @@
+\select@language {american}
+\contentsline {chapter}{Dedication}{iii}
+\contentsline {chapter}{Acknowledgments}{iv}
+\contentsline {chapter}{Abstract}{v}
+\contentsline {chapter}{Glossary}{x}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Background and Motivation}{3}
+\contentsline {section}{\numberline {2.1}The Plan 9 Operating System}{3}
+\contentsline {subsection}{\numberline {2.1.1}Organization of Plan 9 Networks}{4}
+\contentsline {subsection}{\numberline {2.1.2}The 9P Protocol}{5}
+\contentsline {section}{\numberline {2.2}Motivation}{6}
+\contentsline {subsection}{\numberline {2.2.1}Initial Testing}{7}
+\contentsline {section}{\numberline {2.3}Streams for 9P}{9}
+\contentsline {chapter}{\numberline {3}Previous Work}{13}
+\contentsline {section}{\numberline {3.1}Parallel {\tt cp}}{13}
+\contentsline {section}{\numberline {3.2}FTP}{13}
+\contentsline {section}{\numberline {3.3}Op}{14}
+\contentsline {section}{\numberline {3.4}NFS}{14}
+\contentsline {section}{\numberline {3.5}HTTPFS}{15}
+\contentsline {section}{\numberline {3.6}LBFS}{16}
+\contentsline {section}{\numberline {3.7}Transparent Informed Prefetching}{16}
+\contentsline {section}{\numberline {3.8}Parallel File Systems}{16}
+\contentsline {section}{\numberline {3.9}Summary}{17}
+\contentsline {chapter}{\numberline {4}Streaming 9P Design}{18}
+\contentsline {section}{\numberline {4.1}Library Interface}{18}
+\contentsline {section}{\numberline {4.2}Message Format}{19}
+\contentsline {section}{\numberline {4.3}Rejected Designs}{20}
+\contentsline {section}{\numberline {4.4}Summary}{21}
+\contentsline {chapter}{\numberline {5}Implementation}{22}
+\contentsline {section}{\numberline {5.1}The C Library}{22}
+\contentsline {section}{\numberline {5.2}System Calls}{25}
+\contentsline {section}{\numberline {5.3}Device-specific Functions}{25}
+\contentsline {subsection}{\numberline {5.3.1}Devmnt}{26}
+\contentsline {section}{\numberline {5.4}Compatibility Mode}{26}
+\contentsline {section}{\numberline {5.5}Organization Overview}{27}
+\contentsline {section}{\numberline {5.6}Summary}{27}
+\contentsline {chapter}{\numberline {6}Modifying Existing Programs}{29}
+\contentsline {section}{\numberline {6.1}General Modification Practices}{29}
+\contentsline {section}{\numberline {6.2}cp}{30}
+\contentsline {section}{\numberline {6.3}exportfs}{30}
+\contentsline {chapter}{\numberline {7}Results}{31}
+\contentsline {section}{\numberline {7.1}Transfer Speed Test}{31}
+\contentsline {section}{\numberline {7.2}Concurrency Test}{33}
+\contentsline {chapter}{\numberline {8}Conclusions}{37}
+\contentsline {section}{\numberline {8.1}Conclusions}{37}
+\contentsline {section}{\numberline {8.2}Future Work}{38}
+\contentsline {chapter}{Bibliography}{39}

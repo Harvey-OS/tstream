@@ -1,0 +1,25 @@
+Introduction
+	Copying a file is slow
+	Why? 9P is RPC, must wait for a response every time
+	'fcp' is not the answer
+	We frequently read sequentially, but 9P makes us ask specifically each time
+[Graphic: the 9P model]
+[Graphic: the HTTP model]
+Motivation
+	We measured HTTP vs. 9P for transferring files
+	Used simulated latency
+	[tables from paper]
+Streams
+	When reading sequentially, imitate HTTP
+	Send a Tstream, get lots of Rstreams back
+
+Implementation
+	Added stream and sread system calls
+	Devmnt is sending Tstream messages
+	exportfs is replying with Rstream messages
+	Kernel is crashing when sread tries to read Rstream messages
+
+gnuplot> set xlabel "File size, MB" font "Times-Roman,20"
+gnuplot> set ylabel "Transfer time, seconds" font "Times-Roman,20"
+set title "15 ms RTT Latency" font "Times-Roman,26"
+gnuplot> plot "15ms.txt" using 1:2 title "9P" with linespoints, "15ms.txt" using 1:3 title "HTTP" with linespoints

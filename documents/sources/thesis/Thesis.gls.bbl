@@ -1,0 +1,41 @@
+\begin{thegloss}
+
+\glossheading{9}
+
+\begin{glossitem}{9P}{9P}{9P}{}
+The unified file protocol used by Plan 9\end{glossitem}
+
+\glossheading{F}
+
+\begin{glossitem}{Fossil}{Fossil}{Fossil}{}
+Front-end disk-based filesystem for Plan 9\end{glossitem}
+
+\begin{glossitem}{FTP}{FTP}{FTP}{}
+File Transfer Protocol. An older protocol used to transfer files between
+  computers over the Internet\end{glossitem}
+
+\glossheading{H}
+
+\begin{glossitem}{HTTP}{HTTP}{HTTP}{}
+Hyper Text Transfer Protocol. A common method for transferring files over the
+  Internet\end{glossitem}
+
+\glossheading{R}
+
+\begin{glossitem}{RPC}{RPC}{RPC}{}
+Remote Procedure Call. Refers to a system in which function calls are converted
+  into messages and transmitted to a remote computer for
+  execution\end{glossitem}
+
+\glossheading{T}
+
+\begin{glossitem}{TCP}{TCP}{TCP}{}
+Transfer Control Protocol; an in-order, guaranteed delivery, flow-controlled
+  protocol in common use on the Internet\end{glossitem}
+
+\glossheading{V}
+
+\begin{glossitem}{Venti}{Venti}{Venti}{}
+Archival storage system for Plan 9\end{glossitem}
+
+\end{thegloss}

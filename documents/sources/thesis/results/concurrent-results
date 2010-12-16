@@ -1,0 +1,19 @@
+Times are averaged
+
+scp:
+	(command line: time scp /n/p9/usr/john/random10M /dev/null &)
+	2 clients: 30.96 sec
+	4 clients: 53.28 sec
+	8 clients: 104.24 sec
+
+http:
+	(command line: time hget http://p9.ce.rit.edu/random10M > /dev/null &)
+	2 clients: 28.51 sec
+	4 clients: 52.53 sec
+	8 clients: 101.93 sec
+
+cp:
+	(command line: time cp /n/p9/usr/john/random10M /dev/null &)
+	2 clients: 79.75 sec
+	4 clients: 100.81 sec
+	8 clients: 158.53 sec

@@ -1,0 +1,568 @@
+\documentclass{beamer}
+
+
+%&Vary the color applet  (try out your own if you like)
+%\colorlet{structure}{red!65!black}
+
+\usetheme{Warsaw}
+
+\usepackage{beamerthemesplit}
+
+\usepackage{ifpdf}          % Detect PDFLaTeX/LaTeX (defines ifpdf)
+\usepackage{hyperref}   % For hyperlinks
+      
+\ifpdf
+	\usepackage{graphicx}
+	\DeclareGraphicsExtensions{.pdf,.png,.jpg}      % order is important
+	%\usepackage[textwidth=1in]{todonotes}
+
+\else
+	\usepackage{graphicx}                   % For inclusion of graphics
+	\DeclareGraphicsExtensions{.eps}
+	%\usepackage[dvistyle,textwidth=1in]{todonotes}
+
+\fi
+\graphicspath{{.//figures//}}
+
+\setbeamertemplate{navigation symbols}{}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+\newcommand{\MyLogo}{%
+	\begin{textblock}{14}(2,2)
+		\includegraphics[width=2cm]{logo/rit_white_no_bar}
+	\end{textblock}
+	\begin{textblock}{14}(112,0)
+		\includegraphics[width=1.5cm]{logo/netip_logo}
+	\end{textblock}
+}
+
+\setbeamersize{text margin left=0.1in}
+\setbeamersize{text margin right=0.1in}
+
+
+\usepackage{caption}
+\DeclareCaptionFont{tiny}{\tiny}
+\captionsetup{labelformat=empty, labelsep=none, font=tiny}
+
+\usepackage{subfigure}
+
+
+\title[Mathematical Model of the Pacinian Corpuscle]{Mathematical Model of the Pacinian Corpuscle for Design of Haptic Systems}
+\author[Daniel Liu]{ Daniel F. Liu \\
+		\footnotesize{ Advisor: Dr. Shanchieh Jay Yang }}
+
+\institute[Rochester Institute of Technology]{
+	Department of Computer Engineering\\
+	Rochester Institute of Technology}
+\date[NETIP 2010]{Friday, September 17, 2010 - Research Meeting}
+\subject{Computational Neuroscience}
+
+
+
+
+\begin{document}
+
+\frame {
+	\MyLogo
+	\titlepage
+}
+
+\frame {
+	\MyLogo
+	\tableofcontents
+}
+
+\section{Introduction}
+\subsection{What is Haptics?}
+\frame {
+	\MyLogo
+	\frametitle{What is Haptics?}
+
+
+	\begin{itemize}
+		\itemsep=.1in
+		\item Haptics - the science concerned with the sense of touch/somatic sense.
+		\item A part of perceptual science, Haptics can be separated into:
+		\begin{itemize}
+			\itemsep=.1in
+			\item \textbf{Haptic Systems} - tactile feedback systems, tactile HCI
+			\item \textbf{Neuroscience} - biophysics, physiology, modeling of somatic system
+			\item \textcolor{gray}{\emph{Psychophysics - quantified study for relationships between tactile stimuli and sensation}}
+			\item \textcolor{gray}{\emph{Psychology - study of human mental processes}}
+
+		\end{itemize}
+	\end{itemize}
+
+}
+
+\subsection{Haptic Systems}
+\frame {
+	\MyLogo
+	\frametitle{Haptic Systems}
+	\begin{columns}[T]
+	\column{3in}
+	\begin{itemize}
+		\itemsep=.1in
+		\item Haptic Systems (Tactile Feedback Systems)
+		\begin{itemize}
+			\itemsep=.1in
+			\item Tactile Displays
+			\begin{itemize}
+				\itemsep=.1in
+				\item \textbf<1>{Mechanical Pins (Pressure)}
+				\item \textbf<2>{Pneumatic Balloons (Pressure)}
+				\item \textbf<3>{Electrostatic Resistance (Slip-Shear)}
+			\end{itemize}
+			\item Tactile Sensors
+			\begin{itemize}
+				\itemsep=.1in
+				\item \textbf<4>{MEMs/Piezoelectric Sensors (Pressure/Vibration)}
+				\item \textbf<5>{Peltier Devices (Thermal)}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+ 
+	\column{2in}
+
+	\begin{figure}[c]
+		\only<1>{
+			\includegraphics[width=1.5in]{"haptic systems"/"2006 - Ottermo - pin tactile display"}
+			\caption[]{Pin Array Tactile Display \cite{Ottermo2006}}
+		}
+		\only<2>{
+			\includegraphics[width=1.5in]{"haptic systems"/"2008 - King - pneumatic ballon davinci display"}
+			\caption[]{Pneumatic Ballon Tactile Display \cite{Culjat2008a}}
+		}
+		\only<3>{
+			\includegraphics[width=1.5in]{"haptic systems"/"2007 - Yokota - softness electrostatic slip-shear display"}
+			\caption[]{Electrostatic Slip-Shear Display \cite{Yokota2007}}
+		}
+		\only<4>{
+			\includegraphics[width=1.5in]{"haptic systems"/"2005 - Valdastri - tri-axial force sensor"}
+			\caption[]{Electrostatic Slip-Shear Display \cite{Beccai2005}}
+		}
+		\only<5>{
+			\includegraphics[width=1.5in]{"haptic systems"/"wikimedia - peltier device"}
+			\caption[]{Solid-state Thermoelectric Device}
+		}
+	\end{figure}
+
+	\end{columns}
+
+}
+
+\section{Motivation}
+\subsection{Haptic Systems}
+\frame {
+	\MyLogo
+	\frametitle{Motivation}
+
+	\begin{columns}[c]
+	\column{3in}
+	\begin{itemize}
+		\itemsep=.1in
+		\item Need for enhanced human computer interaction with new remote technologies:
+		\begin{itemize}
+			\itemsep=.1in
+			\item \textbf<1>{Aircraft Controls}
+			\item \textbf<2>{Virtual Reality}
+			\item \textbf<3>{Haptic Feedback for Robotics and Medical Devices}
+
+		\end{itemize}
+	\end{itemize}
+	\vspace{1in}
+
+	\column{2in}
+	\begin{figure}[c]
+		\only<1>{
+			\includegraphics[width=1.5in]{"haptic systems"/"MiG-29 Joystick"}
+			\caption[]{Modern Aircrafts with Force Feedback (MiG-29 Joystick)}
+		}
+		\only<2>{
+			\includegraphics[width=1.5in]{"haptic systems"/"Sensable Haptic Rendering"}
+			\caption[]{Sensable Force Feedback Rendering Device}
+		}
+		\only<3>{
+			\includegraphics[width=1.5in]{"haptic systems"/"Da Vinci Surgical System"}
+			\caption[]{Da Vinci Minimally Invasive Robotic Surgery System}
+		}
+	\end{figure}
+	\end{columns}
+}
+
+\subsection{Haptic System Limitations}
+\frame {
+	\MyLogo
+	\frametitle{Haptic System Limitations}
+	\begin{itemize}
+		\itemsep=.1in
+		\item Sensors and Displays have limited functionality
+		\begin{itemize}
+			\itemsep=.05in
+			\item Restricted to a subset of sensory modalities
+			\item Limited resolution, accuracy, and size
+			\item Signal propagation delay affects perception
+
+		\end{itemize}
+		\item Limited understanding in human perception of touch
+		\begin{itemize}
+			\itemsep=.05in
+			\item Modalities and taxonomy of tactile perceptions ill-defined
+			\item Physiological processes in somatic system partially known
+			\item Perception of touch difficult to quantify
+		\end{itemize}
+		\item Traditionally few researchers actively study perceptual science with haptic systems
+
+	\end{itemize}
+}
+\subsection{Problem Statement}
+\frame {
+	\MyLogo
+	\frametitle{Problem Statement}
+	\begin{columns}[c]
+
+	\column{3in}
+		\begin{itemize}
+			\item Mathematical Model of the Pacinian Corpuscle (PC)
+			\begin{itemize}
+				\item Extend existing models and research
+				\begin{itemize}
+					\item Frequency Response
+					\item \textbf{Thermal Response}
+					\item \textbf{Sensory Adapatation}
+				\end{itemize}
+			\end{itemize}
+			\item Responsible for high frequency sensations
+			\begin{itemize}
+				\item Texture
+				\item Fine control of tools
+			\end{itemize}
+			\item Receptor targeted by vibrotactile haptic displays
+			\item \footnotesize Quantify different effects
+			\item \footnotesize Discover and support physiogical theories
+			\item \footnotesize Offer design requirements or processing models for haptic systems
+		\end{itemize}
+	\column{2in}
+	\begin{figure}[c]
+		\includegraphics[width=1.5in]{"PC"/"McGraw Hill - Cutaneous Receptors"}
+		\caption[]{Cutaneous Receptors in the skin \copyright McGraw Hill}
+	\end{figure}
+	\begin{figure}[c]
+		\includegraphics[width=1.5in]{"PC"/"1991 - Bell - PC Physiological Schematic"}
+		\caption[]{Morphology and Schematic of Pacinian Corpuscle \cite{Holmes1990}}
+	\end{figure}
+	\end{columns}
+	
+}
+
+\section{Related Work}
+\subsection{Physiological Data}
+\frame {
+	\MyLogo
+	\frametitle{Physiological Data}
+	Example Datasets from Physiology Experiments
+	\begin{columns}[t]
+	\column{1.5in}
+	\begin{figure}[t]
+		\includegraphics[width=1.5in]{"PC"/"1961 - Sato - RC Vibration frequency vs spike threshold"}
+		\caption[]{Stimuli vibration frequency vs relative threshold to generate neural spikes \cite{Sato1961} }
+	\end{figure}
+
+	\column{1.5in}
+	\begin{figure}[t]
+		\includegraphics[width=1.5in]{"PC"/"1982 - bolanowski - PC Intensity Characteristics"}
+		\caption[]{PC firing rate over varying stimuli intensities and frequencies \cite{BolanowskiJr1982}}
+	\end{figure}
+	\column{1.5in}
+	\begin{figure}[t]
+		\includegraphics[width=1.5in]{"PC"/"1982 - bolanowski - PC Intensity over Thermal Characteristics 30Hz 100Hz"}
+		\caption[]{PC firing rate over varying stimuli intensities and temperatures at 30 and 100 Hz \cite{BolanowskiJr1982}}
+	\end{figure}
+	\end{columns}
+}
+\subsection{Phenomenological Models}
+\frame {
+	\MyLogo
+	\frametitle{Phenomenological Models}
+
+	\begin{columns}[b]
+
+	\column{2.5in}
+	\begin{figure}[b]
+		\includegraphics[width=2in]{"PC"/"1982 - Freeman - equivalent circuit model of temporal discharge patterns"}
+		\caption[]{4 Parameter Kinetic Model of PC Represented as a Circuit \cite{Freeman1982b}}
+	\end{figure}
+
+	\column{2.5in}
+	\begin{figure}[b]
+		\includegraphics[width=2.5in]{"PC"/"1983 - Grandori- PC equivalence model"}
+		\caption[]{Linear Filter and Curve Fitted Equivalent Model \cite{Grandori1983}}
+	\end{figure}
+
+	\end{columns}
+
+	\begin{itemize}
+		\item Two example phenomenological (equivalence) models based on observed stimuli response and simplified models
+		\item Little biological basis for model implementation
+		\item Does not model all experimental observations
+		\item Not easily extended with parameters not explicitly modeled (e.g. temperature, adaptivity)
+	\end{itemize}
+}
+
+\subsection{Biophysical Model}
+
+\frame {
+	\MyLogo
+	\frametitle{Biophysical Model}
+	\begin{itemize}
+		\item Model by Bell and Holmes \cite{Holmes1990}\cite{Bell1992}
+		\begin{itemize}
+			\item Extends Hodgkin Huxley Model \cite{Hodgkin1952} of neuron electrical properties
+		\end{itemize}
+	\end{itemize}
+
+	\begin{columns}[t]
+
+	\column{2.5in}[b]
+	\begin{figure}[b]
+		\includegraphics[width=2.5in]{"hh"/"wikimedia - action potential"}
+		\caption[]{Example electrical signal (action potential) in nerves}
+	\end{figure}
+
+	\column{2.5in}
+	\begin{figure}[b]
+		\includegraphics[width=2.5in]{"PC"/"1991 - Bell - PC Physiological Schematic"}
+		\caption[]{Morphology and Schematic of Pacinian Corpuscle \cite{Holmes1990}.  Action potentials start in the unmyelinated terminus of the dendrite and propogate down into the nervous system}
+	\end{figure}
+
+	\end{columns}
+}
+
+\frame{
+	\MyLogo
+	\frametitle{Biophysical Model - Hodgkin Huxley}
+	\begin{itemize}
+		\item Different concentration of ions on each side of membrane
+		\item Channels open and close at different voltages
+		\item Changing ion concentrations cause current and voltage change (electrical signal)
+	\end{itemize}
+	\begin{figure}
+		\subfigure{\includegraphics[width=2in]{"hh"/"nature - ion channel"}}
+		\subfigure{\includegraphics[width=2in]{"hh"/"HH circuit schematic"}}
+		\caption[]{\textbf{Left:} Nerve membrane with voltage sensitive, gated ion channels. \textbf{Right:} Circuit representation of Hodgkin Huxley's model of channels.}
+	\end{figure}
+}
+
+\frame{
+	\MyLogo
+	\frametitle{Biophysical Model - Cable Theory \& Compartment Model}
+	\begin{itemize}
+		\item Describes signal propagation through an ideal cylindrical cable
+	\end{itemize}
+\[\textstyle \frac{1}{r_{i}} \frac{\delta^{2}V_{m}}{\delta x^{2}}=C_{m}*\frac{\delta V_{m}}{\delta t} + \frac{V_{m}}{r_{m}}\]
+\scriptsize where:\\
+ $r_{i}$ - internal cytoplasm resistance ($\Omega/cm$)\\
+ $V_{m}$ - membrane voltage ($V$)\\
+ $x$ - length along membrane ($cm$)\\
+ $r_{m}$ - membrane resistance ($\Omega/cm$)\\
+\normalsize
+	\begin{itemize}
+		\item Compartment model is discrete representation of cable propagation
+	\end{itemize}
+	\begin{figure}[b]
+		\includegraphics[width=3in]{"hh"/"cable theory circuit"}
+		\caption[]{ Compartment Model of Cable Theory in Circuit Representation }
+	\end{figure}
+}
+
+\frame {
+	\MyLogo
+	\frametitle{Biophysical Model - Bell \& Holmes}
+	\begin{itemize}
+		\itemsep=.1in
+		\item Models mechanical properties of capsule - translates displacement of corpuscle surface to hoop-strain
+		\item Exact transduction method unclear
+		\begin{itemize}
+			\item Some evidence shows a new strain dependent sodium channel
+			\item Hodgkin Huxley Sodium Channel modified to be voltage and strain energy dependent
+\end{itemize}
+		\item Rigorous mathematical analysis (systems mostly solved analytically)
+		\item Qualitative comparisons against experimental data
+	\end{itemize}
+}
+
+\section{Methodology}
+\subsection{Simulation Enviornment}
+\frame {
+	\MyLogo
+	\frametitle{NEURON}
+	\begin{itemize}
+		\item NEURON Simulator (Yale University)
+		\begin{itemize}
+			\itemsep=.1in
+			\item Well supported computational neural simulator (500+ models over 15 years)
+			\item Compartmental model
+			\item Solves arbritary dynamical systems in each compartment using a backward Euler or Crank-Nicholson solver
+			\item ideal for implemental channel models in custom language NMODL
+			\item No published mechanoreceptor models
+
+\end{itemize}
+\end{itemize}
+}
+
+\subsection{New Parameters}
+\frame {
+	\MyLogo
+	\frametitle {Thermal Parameters}
+	\begin{enumerate}
+		\item All Nernst (e.g. $E_{K}, E_{Na}$) potentials are based on temperature. (e.g. $E_{K}=-\frac{RT}{nF}ln\frac{[K]_{in}}{[K]_{out}}$)
+
+		\item The time/rate constants $\alpha$ and $\beta$ changes based on a proportional relationship with $Q$.
+		\[Q=3^{[t-6.3]/10}\]
+		where for example:
+		\[\frac{dn}{dt}=Q\alpha_{n}[1-n]-Q\beta_{n}n\]
+
+		\item The maximum conductance of an ion (e.g. $N_{k}\gamma_{k}, N_{Na}\gamma_{Na}$) also depends on temperature, which is not usually considered in H-H simulations because is not as significant as other parameters.  May be significant in the PC's initial gradient response.
+	\end{enumerate}
+}
+
+\frame {
+	\MyLogo
+	\frametitle{Sensory Adaptation}
+	\begin{itemize}
+		\itemsep=.1in
+		\item Rapid Adaptation - caused by mechanical high-pass filter behavior of corpuscle
+		\item Evidence shows tactile receptors could have multiple ion channels with different time constants contributing to different rates of adaptation \cite{French1994}
+		\item Neurotransmitter feedforward could contribute to adaptation
+
+	\end{itemize}
+}
+
+
+
+\frame {
+	\MyLogo
+	\frametitle{Channels for Mechanoreception}
+	\begin{columns}[c]
+	\column{2in}
+	Three possible types activation methods for mechanoreceptors. Experimental data supports stretch (a) and tethered (b) type channels, while indirect gating (c) is hypothesized by some researchers.
+	\column{2in}
+	\begin{figure}
+		\includegraphics[width=1.8in]{"mechanoreceptor"/"2007 - Lumpkin - mechanoreceptor channel types"}
+	\end{figure}
+	\end{columns}
+}
+
+
+\frame {
+	\MyLogo
+	\frametitle{Channels for Mechanoreception}
+
+	Table of known tactile (mechanical and thermal) channels in mammals \cite{Lumpkin2007}\cite{Belmonte2008}
+	\tiny
+
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Channel Name} & \textbf{Modalities} & \textbf{Found In} \\
+		\hline
+		\hline
+		TRPA1 & Thermal, mechanical & C-fibres \\
+		\hline
+		TRPC1 & Mechanical & Mechanoreceptors \\
+		\hline
+		TRPM8 & Thermal, mechanical (membrane tension) & C-fibres \\
+		\hline
+		TRPV1 & Thermal, osmotic, mechanical (modulatory) & C-, A(delta)-fibres, keratinocytes \\
+		\hline
+		TRPV2 & Thermal, osmotic, mechanical & A(delta)-, A(beta)-fibres, immune cells \\
+		\hline
+		TRPV4 & Thermal, osmotic, mechanical (sheer stress) & Keratinocyptes, Merkel cells, A(delta)-, C-fibres \\
+		\hline
+		ASIC1 & Mechanical (?) , cold (positive modulator) & A(delta)-, A(beta)-, C-fibres \\
+		\hline
+		ASIC2 & Mechanical & A(delta)-, A(beta)-fibres \\
+		\hline
+		ASIC3 & Mechanical, cold (positive modulator), nociception & A(delta)-, A(beta)-fibres \\
+		\hline
+		TREK-1 & Thermal (heat), mechanical & A(delta)-, A(beta)\- (?) , C-fibres \\
+		\hline
+		TREK-2 & Thermal (heat), mechanical & \\
+		\hline
+	\end{tabular}
+}
+
+\subsection{More Theory/Implementation}
+\frame {
+	\MyLogo
+	\frametitle{Original Hodgkin Huxley Model}
+	\[\scriptstyle I_{m} = I_{k}+I_{Na}+I_{L}+I_{c}\]
+	\[\scriptstyle I_{K} = g_{K}(t,v_{m})[V_{m}-E_{K}]\]
+	\[\scriptstyle g_{K}(t,v_{m})=N_{K} \gamma_{Na} n^{4}(t,v_{m})\]
+	\[\scriptstyle I_{Na} = g_{Na}(t,v_{m})[V_{m}-E_{Na}]\]
+	\[\scriptstyle  g_{Na}(t,v_{m})=N_{Na} \gamma_{Na} m^{3}(t,v_{m})h(t,v_{m})\]
+	\[\scriptstyle I_{L}=g_{L}[V_{m}-E_{L}]\]
+	\[\scriptstyle I_{c}=C_{m}\frac{d V_{m}}{dt}\]
+	\tiny where \\
+	K - Potassium\textsuperscript{+} ion, Na - Sodium\textsuperscript{+} ion, L - Leakage, c - Capacitance \\
+	$N_{x}$ - number of x-ion channels (or number of x-ion channels/area) \\
+	$V_{m}$ - membrane voltage \\
+	$E_{x}$ - Nernst Potential x-ion \\
+	$g_{x}$ - proportionality coefficient for x-ion (macroscale conductance) \\
+	$\gamma_{x}$ - conductance of x-ion channel \\
+	$N_{x} \gamma_{x}$ - maximum conductance of N x-ion \\
+	$m^{3}$ - probability of 3 activation subchannels for Na \\
+	$h$ - probability of 1 inactivation subchannel for Na \\
+	$n^{4}$ probability of 4 activation subchannels for K
+}
+
+\frame {
+	\MyLogo
+	\frametitle{Channel Equations}
+		\[\scriptstyle \frac{dn(t,v_{m})}{dt} = \alpha_{n}(v_{m})[1-n]-\beta_{n}(v_{m})n\]
+		\[\scriptstyle \frac{dm}{dt} = \alpha_{m}(v_{m})[1-m]-\beta_{m}(v_{m})m\]
+		\[\scriptstyle \frac{dh}{dt} = \alpha_{h}(v_{m})[1-h]-\beta_{h}(v_{m})h\]
+		
+		Original Hodgkin Huxley parameters
+		\[\scriptstyle \alpha_{n}=\frac{0.01(10-v_{m})}{exp(\frac{10-v_{m}}{10})-1} \qquad \beta_{n}=\frac{1}{exp(8 \frac{v_{m}}{80})} \]
+		\[\scriptstyle \alpha_{m}=\frac{0.1(25-v_{m})}{exp(0.1[25-v_{m}])-1} \qquad \beta_{m}=\frac{1}{0.25exp(\frac{v_{m}}{18})} \]
+		\[\scriptstyle \alpha_{h}=\frac{0.01(10-v_{m})}{exp(\frac{10-v_{m}}{10})-1} \qquad \beta_{h}=\frac{0.125}{exp(\frac{v_{m}}{80})} \]
+		
+		New Sodium parameter for Bell \& Holmes
+		\[\scriptstyle \alpha_{m}(v_{m},U)=0.000792027(T+273.15)exp[a_{1}U+a_{2}v_{m}] \]
+}
+
+\frame {
+	\frametitle{Cable Theory with Excitable Spines}
+	\MyLogo
+	\begin{itemize}
+		\item Improved cable theory model for dendrites with spines (numerous extensions of the membrane that may contain ion channels)
+	\end{itemize}
+	\[ \pi d C_{m} \frac{\delta V_{m}}{\delta t} = \frac{\pi d^{2}}{4 R_{i}} \frac{\delta^{2} V_{m}}{\delta x^{2}} - \frac{\pi d}{R_{m}} V_{m} + \bar N(x) I_{ss}\]
+
+	\begin{columns}[t]
+	\column{1.5in}
+	\tiny where: \\
+	 $C_{m}$ - membrane capacity ($\mu F/cm^{2}$) \\
+	 $R_{i}$ - cytoplasmic/internal resistivity ($\Omega \cdotp cm$)\\
+	 $R_{m}$ - membrane resistance ($\Omega \cdotp cm^{2}$) \\
+	 $d$ - diameter of axon (cm)\\
+	 $V_{m}$ - membrane voltage\\
+	 $I_{ss}$ - current from single spine\\
+	 $\bar N(x)$ - density of spines (spines/unit length)\\
+	$\Delta x \bar N(x) I_{ss}$ - current delivered over length $\Delta X$ by spines\\
+
+	\column{3in}
+	\begin{figure}[b]
+		\includegraphics[width=3in]{"hh"/"cable theory excitable spine circuit"}
+		\caption[]{ Extended Cable Theory with Excitable Spines (Compartment Circuit Representation) }
+	\end{figure}
+	\end{columns}
+}
+
+\frame[allowframebreaks]{
+	\MyLogo
+	\bibliographystyle{IEEEtrans}
+	\tiny{\bibliography{library}}
+}
+\end{document}

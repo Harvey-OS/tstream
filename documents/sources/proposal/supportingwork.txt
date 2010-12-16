@@ -1,0 +1,10 @@
+*Hickey: "Providing Asynchronous File I/O For the Plan 9 Operating System"
+Problem: When using user-mode threads on top of a single kernel process, if one thread performs blocking IO, the entire process must wait. 9P is non-blocking, but it is accessed via blocking system calls.
+Mux: Hickey wrote a user-level program which manages connections between clients and servers. There is one connection to each client or server; all 9P messages are multiplexed along that single connection. Rather than read/write, which block, user threads call muxsend or muxrecv. If muxsend/muxrecv can't return immediately, the user thread is rescheduled, not the kernel process. 
+Results: Scales well to handle many clients/servers. HTTP server modified to use mux did not see noticeable improvements.
+
+*Ballesteros et. al: "Building a Network File System Protocol for Device Access over High Latency Links"
+Problem: High-latency links makes waiting for protocol responses unbearable.
+Op: Styx (9P) batching. Combines multiple operations into a single 9P message, reducing latency. Can fetch an entire file at once/write an entire file at once. Transparent to user programs
+Results: Massive improvement in execution time for "ls", higher bandwidth achieved over high latency links.
+Op is not acceptable because: It is optimized for small files. It performs poorly on low-latency links compared to original 9P. Removes other single-purpose messages. User cannot explicitly choose Op vs. Styx (we want to say "give me streams" or "give me regular reads").

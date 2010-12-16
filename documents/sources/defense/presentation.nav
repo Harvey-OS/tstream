@@ -1,0 +1,73 @@
+\beamer@endinputifotherversion {3.07pt}
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\sectionentry {1}{Introduction}{3}{Introduction}{0}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{What is Haptics?}}\headcommand {\beamer@subsectionpages {3}{2}}
+\headcommand {\slideentry {1}{1}{1}{3/3}{What is Haptics?}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Haptic Systems}}\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\slideentry {1}{2}{1}{4/8}{Haptic Systems}{0}}
+\headcommand {\beamer@framepages {4}{8}}
+\headcommand {\sectionentry {2}{Motivation}{9}{Motivation}{0}}
+\headcommand {\beamer@sectionpages {3}{8}}
+\headcommand {\beamer@subsectionpages {4}{8}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{9}{Haptic Systems}}\headcommand {\beamer@subsectionpages {9}{8}}
+\headcommand {\slideentry {2}{1}{1}{9/11}{Haptic Systems}{0}}
+\headcommand {\beamer@framepages {9}{11}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{12}{Haptic System Limitations}}\headcommand {\beamer@subsectionpages {9}{11}}
+\headcommand {\slideentry {2}{2}{1}{12/12}{Haptic System Limitations}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{13}{Problem Statement}}\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\slideentry {2}{3}{1}{13/13}{Problem Statement}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\sectionentry {3}{Related Work}{14}{Related Work}{0}}
+\headcommand {\beamer@sectionpages {9}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{14}{Physiological Data}}\headcommand {\beamer@subsectionpages {14}{13}}
+\headcommand {\slideentry {3}{1}{1}{14/14}{Physiological Data}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{15}{Phenomenological Models}}\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {3}{2}{1}{15/15}{Phenomenological Models}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{16}{Biophysical Model}}\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\slideentry {3}{3}{1}{16/16}{Biophysical Model}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {3}{3}{2}{17/17}{Biophysical Model}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {3}{3}{3}{18/18}{Biophysical Model}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\slideentry {3}{3}{4}{19/19}{Biophysical Model}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\sectionentry {4}{Methodology}{20}{Methodology}{0}}
+\headcommand {\beamer@sectionpages {14}{19}}
+\headcommand {\beamer@subsectionpages {16}{19}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{20}{Simulation Enviornment}}\headcommand {\beamer@subsectionpages {20}{19}}
+\headcommand {\slideentry {4}{1}{1}{20/20}{Simulation Enviornment}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{21}{New Parameters}}\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\slideentry {4}{2}{1}{21/21}{New Parameters}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\slideentry {4}{2}{2}{22/22}{New Parameters}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {4}{2}{3}{23/23}{New Parameters}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\slideentry {4}{2}{4}{24/24}{New Parameters}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{25}{More Theory/Implementation}}\headcommand {\beamer@subsectionpages {21}{24}}
+\headcommand {\slideentry {4}{3}{1}{25/25}{More Theory/Implementation}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\slideentry {4}{3}{2}{26/26}{More Theory/Implementation}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\slideentry {4}{3}{3}{27/27}{More Theory/Implementation}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\slideentry {4}{3}{4}{28/28}{More Theory/Implementation}{0}}
+\headcommand {\beamer@framepages {28}{28}}
+\headcommand {\beamer@partpages {1}{28}}
+\headcommand {\beamer@subsectionpages {25}{28}}
+\headcommand {\beamer@sectionpages {20}{28}}
+\headcommand {\beamer@documentpages {28}}
+\headcommand {\def \inserttotalframenumber {22}}

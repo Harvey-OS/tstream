@@ -1,0 +1,56 @@
+\begin{thebibliography}{1}
+
+\bibitem{PVFS}
+Phillip~H. Carns, Walter~B. Ligon, III, Robert~B. Ross, and Rajeev Thakur.
+\newblock Pvfs: A parallel file system for linux clusters.
+\newblock In {\em ALS'00: Proceedings of the 4th annual Linux Showcanse \&
+  Conference}, pages 28--28, Berkeley, CA, USA, 2000. USENIX Association.
+
+\bibitem{Op}
+Francisco~Ballesteros et. al.
+\newblock {Building a Network File System Protocol for Device Access over High
+  Latency Links}.
+\newblock In {\em IWP9 Proceedings}, December 2007.
+
+\bibitem{HTTPFS}
+Oleg Kiselyov.
+\newblock {A Network File System over HTTP: Remote Access and Modification of
+  Files and \emph{files}}.
+\newblock In {\em Proceedings of the FREENIX Track: 1999 USENIX Annual
+  Technical Conference}, June 1999.
+
+\bibitem{Lee01appliedtechniques}
+Jason Lee, Dan Gunter, Brian Tierney, Bill Allcock, Joe Bester, John Bresnahan,
+  and Steve Tuecke.
+\newblock Applied techniques for high bandwidth data transfers across wide area
+  networks.
+\newblock In {\em In Proceedings of International Conference on Computing in
+  High Energy and Nuclear Physics}, 2001.
+
+\bibitem{NFSP}
+Pierre Lombard and Yves Denneulin.
+\newblock {NFSP: A distributed NFS server for Clusters of Workstations}.
+\newblock {\em Parallel and Distributed Processing Symposium, International},
+  1:0035, 2002.
+
+\bibitem{LBFS}
+A.~Muthitacharoen, B.~Chen, and D.~Mazières.
+\newblock A low-bandwidth network file system.
+\newblock In {\em Proc. 18th ACM Symp. Op. Sys. principles}, 2001.
+
+\bibitem{TIP}
+R.~Hugo Patterson, Garth~A. Gibson, and M.~Satyanarayanan.
+\newblock A status report on research in transparent informed prefetching.
+\newblock {\em ACM Operating Systems Review}, 27:23--34, 1993.
+
+\bibitem{FTPrfc}
+J.~Postel and J.~Reynolds.
+\newblock {RFC 959}: File transfer protocol, October 1985.
+
+\bibitem{NFS4}
+S.~Shepler, B.~Callaghan, D.~Robinson, R.~Thurlow, C.~Beame, M.~Eisler, and
+  D.~Noveck.
+\newblock {RFC 3530}: Network file system (nfs) version 4 protocol, April 2003.
+\newblock Status: PROPOSED STANDARD.
+
+\end{thebibliography}

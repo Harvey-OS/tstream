@@ -1,0 +1,1 @@
+What about writes? If a write occurs on a streaming file, we must continue sending the original data. Block writes until streaming is done? Make copies in kernel? Lock file?

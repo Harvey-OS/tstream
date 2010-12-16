@@ -1,0 +1,449 @@
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.12.9)  16 DEC 2010 16:49
+entering extended mode
+ %&-line parsing enabled.
+**Thesis.tex
+(./Thesis.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/report.cls
+Document Class: report 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size11.clo
+File: size11.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (./rit-thesis.sty
+Document Style Option `rit-thesis v1.2' <March 13, 2009>.
+(/usr/share/texmf-texlive/tex/latex/setspace/setspace.sty
+Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
+
+Package: `setspace' 6.7 <2000/12/01>
+)) (/usr/share/texmf-texlive/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip43
+\subfigcapskip=\skip44
+\subfigcaptopadj=\dimen103
+\subfigbottomskip=\skip45
+\subfigcapmargin=\dimen104
+\subfiglabelskip=\skip46
+\c@subfigure=\count88
+\c@lofdepth=\count89
+\c@subtable=\count90
+\c@lotdepth=\count91
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/share/texmf-texlive/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip47
+\subfig@bottom=\skip48
+)
+(/usr/share/texmf-texlive/tex/latex/gloss/gloss.sty
+Package: gloss 2002/07/26 1.5.2 Gloss package
+\glosshang=\skip49
+)
+(/usr/share/texmf-texlive/tex/generic/babel/babel.sty
+Package: babel 2005/11/23 v3.8h The Babel package
+
+(/usr/share/texmf-texlive/tex/generic/babel/english.ldf
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+(/usr/share/texmf-texlive/tex/generic/babel/babel.def
+File: babel.def 2005/11/23 v3.8h Babel common definitions
+\babel@savecnt=\count92
+\U@D=\dimen105
+)
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(/usr/share/texmf-texlive/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 90.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
+\Gread@gobject=\count93
+))
+\Gin@req@height=\dimen106
+\Gin@req@width=\dimen107
+)
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\@emptytoks=\toks15
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+))
+(/usr/share/texmf-texlive/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+(/usr/share/texmf-texlive/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks16
+\verbatim@line=\toks17
+\verbatim@in@stream=\read1
+)
+(/usr/share/texmf-texlive/tex/latex/tools/enumerate.sty
+Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
+\@enLab=\toks18
+)
+(/usr/share/texmf-texlive/tex/latex/tools/afterpage.sty
+Package: afterpage 1995/10/27 v1.08 After-Page Package (DPC)
+\AP@output=\toks19
+\AP@partial=\box26
+\AP@footins=\box27
+)
+(/usr/share/texmf-texlive/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count94
+\float@exts=\toks20
+\float@box=\box28
+\@float@everytoks=\toks21
+\@floatcapt=\box29
+)
+\@float@every@program=\toks22
+\c@program=\count95
+ (./watermark.sty
+Package: watermark 2002/01/29 v1.01 Watermarks (NCC)
+)
+\glsf@default=\write3
+\openout3 = `Thesis.gls.aux'.
+
+Package gloss Info: Writing gloss file Thesis.gls.aux on input line 42.
+
+(./Thesis.aux)
+\openout1 = `Thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 44.
+ (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 101.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 101.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[2] [3
+
+] [4
+
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 140.
+ [5
+
+] (./Thesis.toc
+LaTeX Font Info:    Try loading font information for U+msa on input line 2.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 2.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 15.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [6
+
+])
+\tf@toc=\write4
+\openout4 = `Thesis.toc'.
+
+ [7] (./Thesis.lot)
+\tf@lot=\write5
+\openout5 = `Thesis.lot'.
+
+
+[8
+
+] (./Thesis.lof)
+\tf@lof=\write6
+\openout6 = `Thesis.lof'.
+
+ [9
+
+] (./Thesis.gls.bbl
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 5.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 5.
+) [10
+
+]
+Chapter 1.
+[1
+
+] [2]
+Chapter 2.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 190.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 190.
+ [3
+
+]
+<p9net.png, id=50, 412.54124pt x 297.11pt>
+File: p9net.png Graphic file (type png)
+ <use p9net.png> [4 <./p9net.png (PNG copy)>]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 235.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5] [6]
+Overfull \hbox (13.03061pt too wide) in paragraph at lines 268--269
+\OT1/ptm/m/n/12 to the mu-sic player (\OT1/pcr/m/n/12 "hget http://server/file.
+mp3 | games/mp3dec"\OT1/ptm/m/n/12 ), play-
+ []
+
+<network.png, id=60, 372.39125pt x 250.9375pt>
+File: network.png Graphic file (type png)
+ <use network.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<500us.png, id=61, 642.4pt x 481.8pt>
+File: 500us.png Graphic file (type png)
+ <use 500us.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<15ms.png, id=62, 642.4pt x 481.8pt>
+File: 15ms.png Graphic file (type png)
+ <use 15ms.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Missing character: There is no Î in font ptmr7t!
+Missing character: There is no ¼ in font ptmr7t!
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<50ms.png, id=63, 642.4pt x 481.8pt>
+File: 50ms.png Graphic file (type png)
+ <use 50ms.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7] [8 <./network.png>] <9P-read.pdf, id=72, 620.3175pt x 228.855pt>
+File: 9P-read.pdf Graphic file (type pdf)
+
+<use 9P-read.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[9 <./500us.png (PNG copy)>] <HTTP-get.pdf, id=78, 613.29124pt x 367.3725pt>
+File: HTTP-get.pdf Graphic file (type pdf)
+
+<use HTTP-get.pdf>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10 <./15ms.png (PNG copy)>] [11 <./50ms.png (PNG copy)>] [12 <./9P-read.pdf> <
+./HTTP-get.pdf>]
+Chapter 3.
+[13
+
+] [14]
+Overfull \hbox (13.53221pt too wide) in paragraph at lines 434--435
+[]\OT1/pcr/m/n/8 open("http://hostname/cgi-bin/admin/MCHFS-server.pl/DeepestRoo
+t/etc/passwd", O[]RDONLY)\OT1/ptm/m/n/12 . [[]] 
+ []
+
+
+Overfull \hbox (12.28352pt too wide) in paragraph at lines 441--442
+\OT1/ptm/m/n/12 The Low-Bandwidth File Sys-tem (LBFS) adapted typ-i-cal caching
+ be-hav-ior for low-bandwidth
+ []
+
+[15] [16] [17]
+Chapter 4.
+[18
+
+] [19] [20] [21]
+Chapter 5.
+<stack.png, id=125, 396.77647pt x 264.99pt>
+File: stack.png Graphic file (type png)
+ <use stack.png> [22
+
+ <./stack.png (PNG copy)>] [23] [24]
+Overfull \hbox (19.58102pt too wide) in paragraph at lines 669--670
+\OT1/ptm/m/n/12 file. The func-tion pro-to-type for the sys-tem call was also d
+e-fined in \OT1/pcr/m/n/12 /sys/include/libc.h\OT1/ptm/m/n/12 .
+ []
+
+[25] [26] <flowchart.png, id=141, 1146.40059pt x 871.49118pt>
+File: flowchart.png Graphic file (type png)
+
+<use flowchart.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[27] [28 <./flowchart.png (PNG copy)>]
+Chapter 6.
+
+Overfull \hbox (16.06438pt too wide) in paragraph at lines 717--718
+\OT1/ptm/m/n/12 Streams are used by reg-u-lar user pro-grams (such as \OT1/pcr/
+m/n/12 cp\OT1/ptm/m/n/12 ) and by 9P servers (such as \OT1/pcr/m/n/12 exportfs\
+OT1/ptm/m/n/12 ,
+ []
+
+[29
+
+] [30]
+Chapter 7.
+File: network.png Graphic file (type png)
+<use network.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[31
+
+] <results/res2/500us.png, id=158, 642.4pt x 481.8pt>
+File: results/res2/500us.png Graphic file (type png)
+
+<use results/res2/500us.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<results/res2/15ms.png, id=159, 642.4pt x 481.8pt>
+File: results/res2/15ms.png Graphic file (type png)
+ <use results/res2/15ms.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[32]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<results/res2/50ms.png, id=163, 642.4pt x 481.8pt>
+File: results/res2/50ms.png Graphic file (type png)
+ <use results/res2/50ms.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<results/concurrent.png, id=164, 642.4pt x 481.8pt>
+File: results/concurrent.png Graphic file (type png)
+
+<use results/concurrent.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[33 <./results/res2/500us.png (PNG copy)>] [34] [35 <./results/res2/15ms.png (P
+NG copy)>] [36 <./results/res2/50ms.png (PNG copy)> <./results/concurrent.png (
+PNG copy)>]
+Chapter 8.
+[37
+
+]
+Overfull \hbox (4.79262pt too wide) in paragraph at lines 903--904
+[]\OT1/ptm/m/n/12 Additionally, it may be ad-van-ta-geous to mod-ify other ker-
+nel de-vices (be-yond the already-
+ []
+
+(./Thesis.bbl [38] [39
+
+]) [40] (./Thesis.aux) ) 
+Here is how much of TeX's memory you used:
+ 2077 strings out of 95086
+ 26046 string characters out of 1183255
+ 79197 words of memory out of 1500000
+ 5174 multiletter control sequences out of 10000+50000
+ 29649 words of font info for 71 fonts, out of 1200000 for 2000
+ 28 hyphenation exceptions out of 8191
+ 25i,8n,24p,1305b,314s stack positions out of 5000i,500n,6000p,200000b,5000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}<
+/usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf-te
+xlive/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/b
+luesky/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.p
+fb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/te
+xmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on Thesis.pdf (50 pages, 349904 bytes).
+PDF statistics:
+ 224 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+

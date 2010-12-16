@@ -1,0 +1,23 @@
+\select@language {american}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A Plan 9 network\cite {Pike95:PBL}}}{4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Local network for simulating latency}}{8}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces HTTP vs. 9P, 500 $\mu $s RTT}}{9}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces HTTP vs. 9P, 15 ms RTT}}{10}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces HTTP vs. 9P, 50 ms RTT}}{11}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces The 9P file reading model}}{12}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces The HTTP file reading model}}{12}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The client-side streaming software stack}}{22}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Streaming organization flowchart}}{28}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Network for simulating artificial latency}}{32}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces HTTP vs. 9P vs. Streaming 9P, 500 $\mu $s RTT}}{33}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces HTTP vs. 9P vs. Streaming 9P, 15 ms RTT}}{35}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces HTTP vs. 9P vs. Streaming 9P, 50 ms RTT}}{36}
+\contentsline {figure}{\numberline {7.5}{\ignorespaces 10 MB file transfer speeds with multiple concurrent clients}}{36}
+\addvspace {10\p@ }

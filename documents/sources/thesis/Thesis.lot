@@ -1,0 +1,19 @@
+\select@language {american}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Default 9P Messages}}{6}
+\contentsline {table}{\numberline {2.2}{\ignorespaces HTTP vs. 9P, no induced latency, average RTT 500 $\mu $s}}{8}
+\contentsline {table}{\numberline {2.3}{\ignorespaces HTTP vs. 9P, induced latency of 15 ms RTT}}{9}
+\contentsline {table}{\numberline {2.4}{\ignorespaces HTTP vs. 9P, induced latency of 50 ms RTT}}{10}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Streaming Library Function Prototypes}}{18}
+\contentsline {table}{\numberline {4.2}{\ignorespaces 9P Streaming Messages}}{19}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces HTTP vs. 9P vs. Streaming 9P, no induced latency, average RTT 500 $\mu $s}}{32}
+\contentsline {table}{\numberline {7.2}{\ignorespaces HTTP vs. 9P vs. Streaming 9P, Average RTT 15 ms}}{34}
+\contentsline {table}{\numberline {7.3}{\ignorespaces HTTP vs. 9P vs. Streaming 9P, 50 ms RTT}}{34}
+\contentsline {table}{\numberline {7.4}{\ignorespaces 10 MB file transfer speeds with multiple concurrent clients}}{35}
+\addvspace {10\p@ }

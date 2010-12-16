@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{5intro}
+{\em Introduction to the {Plan 9} file protocol, 9P}.
+\newblock Plan 9 online manual, section 5.
+
+\bibitem{Op}
+Francisco~Ballesteros et. al.
+\newblock {Building a Network File System Protocol for Device Access over High
+  Latency Links}.
+\newblock In {\em IWP9 Proceedings}, December 2007.
+
+\bibitem{HTTPFS}
+Oleg Kiselyov.
+\newblock {A Network File System over HTTP: Remote Access and Modification of
+  Files and \emph{files}}.
+\newblock In {\em Proceedings of the FREENIX Track: 1999 USENIX Annual
+  Technical Conference}, June 1999.
+
+\bibitem{LBFS}
+A.~Muthitacharoen, B.~Chen, and D.~Mazieres.
+\newblock A low-bandwidth network file system.
+\newblock In {\em Proc. 18th ACM Symp. Op. Sys. principles}, 2001.
+
+\bibitem{Pike95:PBL}
+Rob Pike, Dave Presotto, Sean Dorward, Bob Flandrena, Ken Thompson, Howard
+  Trickey, and Phil Winterbottom.
+\newblock {Plan 9} from {Bell Labs}.
+\newblock 8(3):221--254, Summer 1995.
+
+\bibitem{FTPrfc}
+J.~Postel and J.~Reynolds.
+\newblock {RFC 959}: File transfer protocol, October 1985.
+
+\bibitem{NFS4}
+S.~Shepler, B.~Callaghan, D.~Robinson, R.~Thurlow, C.~Beame, M.~Eisler, and
+  D.~Noveck.
+\newblock {RFC 3530}: Network file system (nfs) version 4 protocol, April 2003.
+\newblock Status: PROPOSED STANDARD.
+
+\end{thebibliography}

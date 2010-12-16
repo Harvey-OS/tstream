@@ -1,0 +1,20 @@
+set term png font arial 11
+set output "500us.png"
+set xlabel "File size, MB" font "Times-Roman,20"
+set ylabel "Transfer time, seconds" font "Times-Roman,20"
+set title "500 us RTT latency\nError bars indicate standard deviation" font "Times-Roman,24"
+plot "500us.txt" using 1:2:3 title "9P" with errorlines, "500us.txt" using 1:4:5 title "HTTP" with errorlines, "500us.txt" using 1:6:7 title "Streaming 9P" with errorlines
+
+set term png font arial 11
+set output "15ms.png"
+set xlabel "File size, MB" font "Times-Roman,20"
+set ylabel "Transfer time, seconds" font "Times-Roman,20"
+set title "15 ms RTT latency\nError bars indicate standard deviation" font "Times-Roman,24"
+plot "15ms.txt" using 1:2:3 title "9P" with errorlines, "15ms.txt" using 1:4:5 title "HTTP" with errorlines, "15ms.txt" using 1:6:7 title "Streaming 9P" with errorlines
+
+set term png font arial 11
+set output "50ms.png"
+set xlabel "File size, MB" font "Times-Roman,20"
+set ylabel "Transfer time, seconds" font "Times-Roman,20"
+set title "50 ms RTT latency\nError bars indicate standard deviation" font "Times-Roman,24"
+plot "50ms.txt" using 1:2:3 title "9P" with errorlines, "50ms.txt" using 1:4:5 title "HTTP" with errorlines, "50ms.txt" using 1:6:7 title "Streaming 9P" with errorlines
