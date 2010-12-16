@@ -693,7 +693,7 @@ slavestream(Fsrpc *p)
 
 	p->canint = 1;
 
-	n = 16*1024;
+	n = 32*1024;
 	offset = work->offset;
 
 	data = malloc(n);

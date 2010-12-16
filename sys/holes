@@ -8,12 +8,12 @@
 /lib/lp/tmp/tn100000000000
 /lib/lp/tmp/hered7f5.0001
 /lib/lp/tmp/lp120953
+/src/9/pc/9pcf.root.8
 /src/libc/9syscall/close.s
 /lib/lp/tmp/lp358408
 /src/9/pc/mkroot.496595.out
 /lib/lp/tmp/lp318040
 /src/9/pc/mkroot.1723.out
-/src/9/pc/bootpcf.8
 /src/libc/9syscall/await.s
 /src/libc/9syscall/exec.s
 /src/9/pc/mkroot.44907.out
@@ -24,8 +24,7 @@
 /lib/lp/tmp/lp2378
 /src/9/pc/mkroot.72034.out
 /src/9/pc/mkroot.242784.out
-/src/9/pc/sdaoe.8
-/src/9/pc/bootpcf.c
+/src/9/pc/9pcf.root.s
 /src/libc/9syscall/rendezvous.8
 /lib/lp/tmp/lp317642
 /lib/lp/tmp/lp265059
@@ -33,7 +32,6 @@
 /src/9/pc/mkroot.74360.out
 /src/9/pc/pccpuf.root.8
 /src/9/pc/mkroot.44197.out
-/src/9/pc/apmjump.8
 /src/9/pc/bootpccpuf.out
 /lib/lp/tmp/lp317796
 /lib/lp/tmp/heredc10.0000
@@ -44,15 +42,19 @@
 /lib/lp/tmp/here7811.0001
 /src/libc/9syscall/_fwstat.8
 /src/9/pc/mkroot.492560.out
+/src/9/pc/pc.8
+/src/9/pc/9pcf.rootc.8
 /src/9/pc/mkroot.180097.out
 /src/9/pc/mkroot.247322.out
 /lib/lp/tmp/lp1189
+/src/9/pc/bootpc.8
 /src/9/pc/mkroot.168413.out
 /lib/lp/tmp/here04ae.0000
 /lib/lp/tmp/here04ae.0001
 /src/libc/9syscall/rendezvous.s
 /src/9/pc/mkroot.241985.out
 /src/9/pc/mkroot.7950.out
+/src/9/pc/mkroot.655541.out
 /src/libc/9syscall/pread.8
 /src/9/pc/mkroot.42178.out
 /src/libc/9syscall/_write.8
@@ -60,10 +62,13 @@
 /src/9/pc/mkroot.177304.out
 /src/9/pc/mkroot.2084.out
 /src/9/pc/bootauth.8
+/src/9/pc/pc.c
 /lib/lp/tmp/here0953.0000
 /lib/lp/tmp/here0953.0001
 /src/libc/9syscall/create.8
 /lib/lp/tmp/lp70588
+/src/9/pc/9pcf.rootc.c
+/src/9/pc/bootpc.c
 /src/9/pc/mkroot.73232.out
 /src/libc/9syscall/_wstat.s
 /src/libc/9syscall/_fwstat.s
@@ -77,6 +82,7 @@
 /src/libc/9syscall/pread.s
 /src/libc/9syscall/_write.s
 /src/9/pc/mkroot.321266.out
+/src/9/pc/pc.rootc.8
 /src/9/pc/mkroot.168692.out
 /src/libc/9syscall/segflush.8
 /lib/lp/tmp/lp318615
@@ -98,6 +104,7 @@
 /src/libc/9syscall/seek.8
 /src/libc/9syscall/sysr1.8
 /src/9/pc/mkroot.163409.out
+/src/9/pc/pc.rootc.c
 /src/9/pc/mkroot.321775.out
 /src/9/pc/mkroot.146477.out
 /src/libc/9syscall/segbrk.8
@@ -115,6 +122,7 @@
 /src/libc/9syscall/mount.8
 /src/9/pc/embed.8
 /lib/lp/tmp/lp358350
+/src/9/pc/uartisa.8
 /src/libc/9syscall/_stat.s
 /src/9/pc/mkroot.73104.out
 /src/libc/9syscall/stat.8
@@ -143,7 +151,7 @@
 /lib/lp/tmp/here099e.0000
 /lib/lp/tmp/here099e.0001
 /lib/lp/tmp/lp357810
-/src/9/pc/bootpcf.out
+/src/9/pc/9pcf.8
 /src/9/pc/mkroot.44691.out
 /src/9/pc/mkroot.310733.out
 /src/9/pc/mkroot.7725.out
@@ -178,9 +186,9 @@
 /src/9/pc/mkroot.164741.out
 /src/9/pc/mkroot.46008.out
 /src/9/pc/mkroot.179703.out
+/src/9/pc/99pcf
 /lib/lp/tmp/heredca0.0000
 /lib/lp/tmp/heredca0.0001
-/src/9/pc/pcf.rootc.8
 /src/libc/9syscall/rfork.s
 /src/9/pc/log.8
 /src/9/pc/mkroot.243060.out
@@ -196,11 +204,9 @@
 /lib/lp/tmp/lp120682
 /src/libc/9syscall/segattach.s
 /src/9/pc/bootpccpuf.8
-/src/9/pc/pcf.rootc.c
 /lib/lp/tmp/lp2095
 /lib/lp/tmp/lp317352
 /src/9/pc/mkroot.43638.out
-/src/9/pc/pcf.root.8
 /src/9/pc/mkroot.47434.out
 /src/9/pc/mkroot.420545.out
 /lib/lp/tmp/hered96d.0000
@@ -221,9 +227,7 @@
 /src/9/pc/mkroot.40539.out
 /src/9/pc/devbridge.8
 /src/9/pc/mkroot.840.out
-/src/9/pc/apm.8
 /src/9/pc/mkroot.7181.out
-/src/9/pc/pcf.root.s
 /src/9/pc/mkroot.243481.out
 /lib/lp/tmp/here13c5.0000
 /src/libc/9syscall/pstream.s
@@ -241,6 +245,7 @@
 /src/9/pc/mkroot.45621.out
 /src/libc/9syscall/_exits.8
 /src/libc/9syscall/dup.8
+/src/9/pc/ether82543gc.8
 /lib/lp/tmp/here0b6d.0000
 /lib/lp/tmp/here0b6d.0001
 /src/9/pc/mkroot.76539.out
@@ -280,9 +285,10 @@
 /lib/lp/tmp/lp120325
 /lib/lp/tmp/hered937.0000
 /lib/lp/tmp/hered937.0001
+/src/9/pc/9pc
 /src/libc/9syscall/noted.s
-/src/9/pc/pcf.8
 /src/libc/9syscall/_wait.8
+/src/9/pc/pc.root.8
 /src/9/pc/mkroot.157550.out
 /lib/lp/tmp/lp402967
 /src/9/pc/pccpuf.rootc.c
@@ -293,8 +299,6 @@
 /lib/lp/tmp/heredd21.0001
 /src/libc/9syscall/bind.8
 /src/9/pc/mkroot.496870.out
-/src/9/pc/9pcf
-/src/9/pc/pcf.c
 /src/9/pc/unthwack.8
 /src/9/pc/mkroot.421579.out
 /lib/lp/tmp/here76ad.0000
@@ -305,6 +309,7 @@
 /src/9/pc/mkroot.247650.out
 /src/9/pc/mkroot.70993.out
 /src/libc/9syscall/_wait.s
+/src/9/pc/pc.root.s
 /lib/lp/tmp/here067b.0000
 /lib/lp/tmp/here067b.0001
 /src/9/pc/mkroot.1849.out
@@ -323,7 +328,6 @@
 /src/9/pc/mkroot.245416.out
 /src/9/pc/boot.8
 /lib/lp/tmp/lp358612
-/src/9/pc/vgaradeon.8
 /lib/lp/tmp/lp317970
 /src/libc/9syscall/pipe.8
 /src/9/pc/mkroot.45363.out
@@ -345,9 +349,9 @@
 /src/9/pc/mkroot.168833.out
 /src/libc/9syscall/_fstat.8
 /src/libc/9syscall/fauth.s
+/src/9/pc/mkroot.653665.out
 /src/9/pc/mkroot.47844.out
 /lib/lp/tmp/lp317848
-/src/9/pc/devaoe.8
 /src/9/pc/mkroot.180223.out
 /src/9/pc/settime.8
 /src/9/pc/mkroot.241780.out
@@ -366,7 +370,7 @@
 /src/9/pc/mkroot.246181.out
 /src/libc/9syscall/wstat.8
 /src/libc/9syscall/_fstat.s
-/src/9/pc/rudp.8
+/src/9/pc/bootpc.out
 /src/9/pc/bootcache.8
 /src/libc/9syscall/fd2path.8
 /lib/lp/tmp/lp263648
@@ -391,4 +395,5 @@
 /lib/lp/tmp/here0838.0001
 /src/9/pc/mkroot.242434.out
 /src/libc/9syscall/await.8
+/src/9/pc/ether82598.8
 /src/libc/9syscall/exec.8
