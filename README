@@ -1,5 +1,13 @@
-These files are meant to be used with the divergefs program, so you don't go stomping
-all over the root. It's also to have a 386 directory so your experimental programs
-go somewhere harmless when you mk install.
+John Floren
+RIT Department of Computer Engineering
+Masters Thesis, Dec. 2010
+Topic: "FTP-like Streams for the 9P File Protocol"
 
-The documents subfolder contains my thesis proposal, defense, and the thesis document itself.
+This CD-ROM contains materials supplemental to my thesis work.
+
+The documents/ subfolder contains my thesis proposal, defense, and the thesis document itself.
+
+The files in sys/ are meant to be used with Plan 9's divergefs program, to avoid making
+changes to the root filesystem. The files under sys/files/ may also be copied to their
+corresponding directories in the /sys tree of Plan 9.
+
